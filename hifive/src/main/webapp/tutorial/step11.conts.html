@@ -1,0 +1,197 @@
+<!-- CONTENTS_CSS_BEGIN -->
+<link rel="stylesheet" href="css/article.css" type="text/css" />
+<link type="text/css" rel="stylesheet"
+	href="../lib/syntaxhighlighter/styles/SyntaxHighlighter.css"></link>
+<!-- CONTENTS_CSS_END -->
+<!-- CONTENTS_SCRIPT_BEGIN -->
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		dp.SyntaxHighlighter.ClipboardSwf = '../lib/syntaxhighlighter/scripts/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	}
+</script>
+<!-- CONTENTS_SCRIPT_END -->
+<!-- CONTENTS_MAIN_BEGIN -->
+<div id="contents">
+	<ul class="menu tutorialIndex">
+		<li><a href="step01.html" title="01.準備">01.準備</a></li>
+		<li><a href="step02.html" title="02.MVC構造">02.MVC構造</a></li>
+		<li><a href="step03.html" title="03.HelloWorld">03.HelloWorld</a></li>
+		<li><a href="step04.html" title="04.コントローラ">04.コントローラ</a></li>
+		<li><a href="step05.html" title="05.ビュー操作">05.ビュー操作</a></li>
+		<li><a href="step06.html" title="06.ロジック">06.ロジック</a></li>
+		<li><a href="step07.html" title="07.非同期処理">07.非同期処理</a></li>
+		<li><a href="step08.html" title="08.テスト">08.テスト</a></li>
+		<li><a href="step09.html" title="09.ドキュメント記述・生成(JSDoc)">09.ドキュメント記述・生成(JSDoc)</a></li>
+		<li><a href="step10.html" title="10.サンプルアプリ（動画検索アプリの作成）">10.サンプルアプリ（動画検索アプリの作成）</a></li>
+		<li><a href="step11.html" title="11.スマートフォン対応（jQueryMobileとの連携）">11.スマートフォン対応（jQueryMobileとの連携）</a></li>
+		<li><a href="step12.html" title="12.HTML5APIの利用">12.HTML5APIの利用</a></li>
+        <li><a href="step13.html" title="13.AOP(アスペクトの適用)">13.AOP(アスペクトの適用)</a></li>
+	</ul>
+	<h1 class="title">チュートリアル11.スマートフォン対応（jQueryMobileとの連携）</h1>
+	<div class="contents contents2">
+		<input type="hidden" name="contents2Level" value="0"><input
+			type="hidden" name="contents2Filter" value=""><input
+			type="hidden" name="contents2Count" value="-1"><input
+			type="hidden" name="contents2CountLevel" value="0">
+		<ul class="list1">
+			<li><a href="#capture025486"> 概要 </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture125486">hifiveとjQuery Mobileの連携 </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture225486">なぜマネージャが必要か </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture325486">連携方法 </a></li>
+			<ul class="list2">
+				<li><a href="#capture425486">サンプルコード </a></li>
+			</ul>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture525486">マネージャの仕組み </a></li>
+		</ul>
+	</div>
+	<a class="anchor_super" id="capture025486"></a><h2>
+		概要
+	</h2>
+	<p>本章では、jQuery Mobileを使った開発を「hifive」と連携しより使い易くするための連携機能を述べます。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>公式サイト<a href="http://jquerymobile.com/" rel="nofollow">jQuery
+				Mobile</a></li>
+	</ul>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>jQueryMobileとは？ <a
+			href="http://builder.japan.zdnet.com/html-css/35011818/"
+			rel="nofollow">http://builder.japan.zdnet.com/html-css/35011818/</a>
+			などを参照してください。
+		</li>
+	</ul>
+	<a class="anchor_super" id="capture125486"><h2>
+		hifiveとjQuery Mobileの連携 </a>
+	</h2>
+	<p>
+		hifiveで用意されたjQuery Mobile専用のコントローラマネージャ(以下、マネージャと呼びます)を使用することにより、<br
+			class="spacer">jQuery Mobile特有のページのライフサイクル(DOM生成や破棄)を意識することなく、<br
+			class="spacer">簡単に組み合わせて使用することができます。<br>また、画面で必要なCSSファイルの読み込みもマネージャが行うので、<br
+			class="spacer">他のページで使用しているCSSファイルの定義に干渉することを回避できます。
+	</p>
+    <a class="anchor_super" id="capture225486"></a><h2>
+        なぜマネージャが必要か
+    </h2>
+    <p>最新のjQuery Mobile
+        1.1.0のデフォルト設定では以下のように動作するため、適切にコントローラを設定したり除去する必要があります。</p>
+    <div class="img_margin" style="text-align: left">
+        <a href="images/jqmcontroller1.jpg" title="jqmcontroller1.jpg"
+            target="_blank"><img src="images/jqmcontroller1.jpg"
+            alt="jqmcontroller1.jpg" width="600px"></a>
+    </div>
+    <div class="img_margin" style="text-align: left">
+        <a href="images/jqmcontroller2.jpg" title="jqmcontroller2.jpg"
+            target="_blank"><img src="images/jqmcontroller2.jpg"
+            alt="jqmcontroller2.jpg" width="600px"></a>
+    </div>
+	<a class="anchor_super" id="capture325486"></a><h2>
+		連携方法
+	</h2>
+	<p>
+		マネージャの使用方法は以下のとおりです。<br>
+	</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>htmlファイルを作成する。構成は1html-1ページ(1html中にdata-role="page"のDIV要素は1つのみ存在する状態)にする。</li>
+		<li>HEADタグにアプリケーション全体で使用するjsファイルやcssファイルを記述する。(ここにjquery.js、h5.js、ejs-1.0.h5mod.js、jquery.mobile.jsやjquery.mobile.cssを書く)</li>
+		<li>h5.js,
+			jquery.mobile.jsを読み込んだ後に、h5.ui.jqm.manager.initメソッドでマネージャを初期化する。</li>
+		<li>マネージャは<span class="strong">1ページ-1コントローラ</span>で管理するので、コントローラの定義が記述されたスクリプトはdata-role="page"のDIV要素のdata-h5-script属性に記述する(複数ある場合は","で分割して記述)。
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>data-h5-script属性に記述されたスクリプトはデフォルトでは<span class="strong">同期的に</span>ロードされます。<br>非同期にロードしたい場合は、data-h5-script属性を記述した要素に<span
+					class="strong">data-h5-async="true"</span>と記述してください。
+				</li>
+			</ul></li>
+		<li>jsファイルを作成し、コントローラの定義を行う。</li>
+		<li><span class="strong">h5.ui.jqm.manager.define</span>メソッドでコントローラを登録する。</li>
+	</ul>
+	<a class="anchor_super" id="capture425486"></a><h3>
+		サンプルコード
+	</h3>
+	<p>
+		<span class="strong">index.html</span>
+	</p>
+	<pre name="code" class="xml">&lt;!doctype html&gt;
+&lt;html lang="ja"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- アプリケーション全体で使用するjsファイルやcssファイルはHEADタグ内に記述する --&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" href="jquery.mobile.css" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="ejs-1.0.h5mod.js"&gt;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="jquery.blockUI.js"&gt;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="h5.js"&gt;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="jquery.mobile.js"&gt;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h5.ui.jqm.manager.init(); // jQuery Mobile用コントローラマネージャの初期化
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;TEST1&lt;/title&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- index.jsにはこのページで使用するコントローラの定義が書かれている --&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- ここ(data-role"page"のDIVのdata-h5-script属性)で、index.jsの宣言を行う --&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div data-role="page" id="index-page" data-h5-script="index.js"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div data-role="header"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;TEST 1&lt;/h1&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div data-role="content"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" id="btn1" value="TEST"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div data-role="footer"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;footer&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;
+&lt;/html&gt;</pre>
+	<p>
+		<span class="strong">index.js</span>
+	</p>
+	<pre name="code" class="js">var indexController = {
+&nbsp;&nbsp;&nbsp;&nbsp;__name: 'IndexController',
+&nbsp;&nbsp;&nbsp;&nbsp;'#btn1 click': function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('Hello!');
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};
+&nbsp;
+// 第一引数にdata-role="page"のDIVのid名を指定
+// 第二引数にこの画面で使用するCSSのパスを指定する。(配列で複数指定可能)
+// 第三引数にコントローラオブジェクト
+h5.ui.jqm.manager.define('index-page', ['index.css'], indexController);</pre>
+	<a class="anchor_super" id="capture525486"></a><h2>
+		マネージャの仕組み
+	</h2>
+	<p>マネージャは内部で以下のように動作します。</p>
+	<ol class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>h5.ui.jqm.manager.initメソッドでマネージャを初期化します。<br>マネージャは初期化時に、アクティブページの<span
+			class="strong">data-h5-script</span>属性に記述されたスクリプトをロードします。
+		</li>
+		<li>h5.ui.jqm.manager.defineメソッドで渡されたコントローラオブジェクトとCSSファイルのパスを、画面ID(data-role="page"DIVのid)キーと対応付けてマネージャに登録します。</li>
+		<li>pageinitイベントが発生すると、2.で登録したコントローラオブジェクトを現在表示されているページにバインド(イベントの登録)します。</li>
+		<li>pagebeforeshowイベントが発生すると、HEADタグから2.で登録したCSSファイルを追加します。</li>
+		<li>pagehideイベントが発生すると、HEADタグから4.で追加したlinkタグを削除します。</li>
+		<li>pageremoveイベントが発生すると、遷移前に表示していたページからコントローラをアンバインド(イベントの解除)します。</li>
+	</ol>
+	<div class="spacer">&nbsp;</div>
+	<div class="spacer">&nbsp;</div>
+	<div style="text-align: center">
+		<span
+			style="font-size: 18px; display: inline; line-height: 130%; text-indent: 0px">次のステップ⇒<a
+			href="step12.html">チュートリアル12.HTML5APIの利用</a></span>
+	</div>
+
+</div>
+<!-- CONTENTS_MAIN_END -->

@@ -1,0 +1,99 @@
+#contents{
+    color: black;
+    font-size: 90%;
+    font-family: Verdana, 'MS PGothic', sans-serif;
+    padding: 20px 0 20px 20px;
+}
+#contents a{
+    text-decoration: none;
+}
+#contents a:hover{
+    text-decoration: underline;
+}
+#contents a:link{
+    color: #116e84;
+}
+#contents a:visited{
+    text-decoration: none;
+    color: #995d30;
+}
+
+#contents hr.full_hr{
+    border-style: ridge;
+    border-color: #333;
+    border-width: 1px 0px;
+}
+
+#contents h1, h2, h3, h4{
+    font-weight: bold;
+    margin-left: -20px;
+}
+#contents h1{
+    padding: 0.3em 0.3em 0.3em 0.5em;
+}
+#contents h1.title{
+    border-bottom: 0.15em solid #DAEDDF;
+    border-left: 0.6em solid #DAEDDF;
+}
+
+#contents h2{
+    background: #f4f9f5;
+    border-left: 0.15em solid #4db564;
+    padding: .5em;
+    font-size: 1.2em;
+}
+
+#contents h3{
+    border-left: 0.6em solid #daeddf;
+    border-bottom: 0.15em solid #daeddf;
+    padding: .4em .5em .4em .4em;
+}
+
+#contents h4{
+    border-left: 0.6em solid #daeddf;
+    padding: .3em .5em .3em .8em;
+    font-size: 1em;
+}
+#contents ul{
+    padding-left: 12px;
+    margin-left: 12px;
+    line-height: 130%;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+#contents ul.list1{
+    list-style-type: disc;
+}
+
+#contents ul.list2{
+    list-style-type: circle;
+}
+
+#contents .strong {
+    font-weight: bold;
+}
+
+#contents .style_table {
+	padding: 0px;
+	border: 0px;
+	text-align: left;
+	color: inherit;
+	background-color: #CCD5DD;
+}
+
+#contents .style_table {
+	text-align: left;
+	color: inherit;
+}
+#contents thead td.style_td, tfoot td.style_td {
+	color: inherit;
+	background-color: #D0D8E0;
+}
+
+#contents .style_td {
+	padding: 5px;
+	margin: 1px;
+	color: inherit;
+	background-color: #EEF5FF;
+}

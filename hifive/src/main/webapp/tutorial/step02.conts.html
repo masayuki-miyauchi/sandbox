@@ -1,0 +1,129 @@
+<!-- CONTENTS_CSS_BEGIN -->
+<link rel="stylesheet" href="css/article.css" type="text/css" />
+<!-- CONTENTS_CSS_END -->
+<!-- CONTENTS_MAIN_BEGIN -->
+<div id="contents">
+	<ul class="menu tutorialIndex">
+		<li><a href="step01.html" title="01.準備">01.準備</a></li>
+		<li><a href="step02.html" title="02.MVC構造">02.MVC構造</a></li>
+		<li><a href="step03.html" title="03.HelloWorld">03.HelloWorld</a></li>
+		<li><a href="step04.html" title="04.コントローラ">04.コントローラ</a></li>
+		<li><a href="step05.html" title="05.ビュー操作">05.ビュー操作</a></li>
+		<li><a href="step06.html" title="06.ロジック">06.ロジック</a></li>
+		<li><a href="step07.html" title="07.非同期処理">07.非同期処理</a></li>
+		<li><a href="step08.html" title="08.テスト">08.テスト</a></li>
+		<li><a href="step09.html" title="09.ドキュメント記述・生成(JSDoc)">09.ドキュメント記述・生成(JSDoc)</a></li>
+		<li><a href="step10.html" title="10.サンプルアプリ（動画検索アプリの作成）">10.サンプルアプリ（動画検索アプリの作成）</a></li>
+		<li><a href="step11.html" title="11.スマートフォン対応（jQueryMobileとの連携）">11.スマートフォン対応（jQueryMobileとの連携）</a></li>
+		<li><a href="step12.html" title="12.HTML5APIの利用">12.HTML5APIの利用</a></li>
+        <li><a href="step13.html" title="13.AOP(アスペクトの適用)">13.AOP(アスペクトの適用)</a></li>
+	</ul>
+	<h1 class="title">チュートリアル02.MVC構造</h1>
+	<div class="contents contents2">
+		<input type="hidden" name="contents2Level" value="0"><input
+			type="hidden" name="contents2Filter" value=""><input
+			type="hidden" name="contents2Count" value="-1"><input
+			type="hidden" name="contents2CountLevel" value="0">
+		<ul class="list1">
+			<li><a href="#capture025483"> 概要 </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture125483"> コントローラ </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture225483"> ロジック </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture325483"> ビュー </a></li>
+		</ul>
+	</div>
+	<a class="anchor_super" id="capture025483"></a><h2>
+		概要
+	</h2>
+	<p>hifiveではクライアントの構成要素を大きく</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li><span class="strong">コントローラ</span>：DOM操作、イベントハンドリング、ロジックの呼び出し</li>
+		<li><span class="strong">ロジック</span>：通信、DB操作、計算</li>
+		<li><span class="strong">ビュー</span>：画面（HTML文字列）の作成</li>
+	</ul>
+	<p>の3つのレイヤーに分類し、それぞれがどのような処理を行うかを定めています。</p>
+	<p>
+		これにより、処理内容ごとに記述箇所や構造が一定になり、どこにどのようなパターンで処理を書くかで<br>悩む必要がなくなると同時に、特に多人数開発においてレビュー・引き継ぎ・保守などの際に<br>どこを見ればよいかがわかりやすくなります。<br>つまり、保守性、可読性を高めることができます。
+	</p>
+	<p>また、各レイヤーでは多くの場面で必要となる</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>ビューテンプレートエンジン</li>
+		<li>UIブロック</li>
+		<li>非同期処理ライブラリ</li>
+	</ul>
+	<p>
+		などの機能・仕掛けがあらかじめ組み込まれており、<br>個別の記述量を減らし、コードをクリーンに保つことができます。
+	</p>
+	<a class="anchor_super" id="capture125483"></a><h2>
+		コントローラ
+	</h2>
+	<p>
+		Controllerはユーザーとのインタラクション処理の中心となります。<br>具体的には、
+	</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>イベントのハンドリング</li>
+		<li>使用するLogic、View(テンプレート)の宣言</li>
+		<li>ライフサイクルイベントの定義</li>
+		<li>DOM操作</li>
+	</ul>
+	<p>などを行います。</p>
+	<a class="anchor_super" id="capture225483"></a><h2>
+		ロジック
+	</h2>
+	<p>hifiveのLogicは純粋な処理、</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>計算</li>
+		<li>サーバとの通信</li>
+		<li>ローカルDBとのやり取り</li>
+	</ul>
+	<p>
+		などを行います。<br>これらの「処理」だけを書くように気をつけることで
+	</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>可読性の向上
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>処理を追いやすくなる</li>
+			</ul>
+		</li>
+		<li>再利用性の向上
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>画面に依存しない</li>
+			</ul>
+		</li>
+		<li>テスト容易性の向上
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>単体テストツールでのテストを行い易くなる</li>
+			</ul>
+		</li>
+		<li>保守性の向上
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>見た目を変える時に、処理のJavaScriptコードに手を入れなくて済む。<br>逆に、Logicを修正する際画面の具体的な実装(HTMLの構造等)に依存しない
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p>などのメリットが生まれます。</p>
+	<a class="anchor_super" id="capture325483"></a><h2>
+		ビュー
+	</h2>
+	<p>
+		View(テンプレート)では、HTMLの記述とデータのバインディングを行います。<br>hifiveでは、JSPライクに記述できるテンプレートエンジン、<a
+			href="http://embeddedjs.com/" rel="nofollow">EJS</a>を採用しています。
+	</p>
+	<div class="spacer">&nbsp;</div>
+	<div class="spacer">&nbsp;</div>
+	<div style="text-align: center">
+		それでは、hifiveのMVC構造にしたがって、"HelloWorld"を作成してみましょう。<br>
+	</div>
+	<div style="text-align: center">
+		<span
+			style="font-size: 18px; display: inline; line-height: 130%; text-indent: 0px">次のステップ⇒<a
+			href="step03.html">チュートリアル03.HelloWorld</a></span>
+	</div>
+</div>
+<!-- CONTENTS_MAIN_END -->

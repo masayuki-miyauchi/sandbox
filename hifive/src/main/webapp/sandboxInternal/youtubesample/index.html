@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link type="text/css" href="../jquery-ui/lib/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../release/h5.css"/>
+		<link type="text/lcss" href="youtube.css" rel="stylesheet">
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../jquery-ui/lib/jquery-ui-1.8.15.custom.min.js"></script>
+		<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../../lib/ejs/ejs.js"></script>
+		<!-- 各モジュールのソースJSを読み込む（h5.jsは必ず最初に読み込む必要がある） -->
+		<script src="../../release/h5.js"></script>
+		<script src="youtube.js"></script>
+	</head>
+	<body>
+		<div class="pageTitle">hifive YouTube検索サンプル</div>
+		<div id="container">
+			<form id="search">
+				<div class="searchRight">
+					<input type="submit" value="検索"/>
+				</div>
+				<div class="searchLeft">
+					<input type="text" id="keyword" placeholder="キーワード"/>
+				</div>
+			</form>
+			<div id="searchResult">
+				<div>
+					<span class="searchCount">ヒット件数：<span id="searchCount">0</span>件</span>
+				</div>
+				<ul id="videos"></ul>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<link type="text/css" href="../lib/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../release/h5.css"/>
+		<script src="../../../lib/jquery/jquery.js"></script>
+		<script src="../../../lib/ejs/ejs.js"></script>
+		<script src="../../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../lib/jquery-ui-1.8.15.custom.min.js"></script>
+		<script src="../lib/jquery-ui-datepicker-ja.js"></script>
+		<!-- 各モジュールのソースJSを読み込む（h5.jsは必ず最初に読み込む必要がある） -->
+		<script src="../../../release/h5.js"></script>
+		<script src="tabs.js"></script>
+		<title>hifive jQuery UI Tabs Sample</title>
+	</head>
+	<body>
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">tab1</a></li>
+				<li><a href="#tabs-2">tab2</a></li>
+				<li><a href="#tabs-3">tab3</a></li>
+			</ul>
+			<div id="tabs-1">
+				tab1
+			</div>
+			<div id="tabs-2">
+				tab2
+			</div>
+			<div id="tabs-3">
+				tab3
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>SVGテストindex</title>
+		<link rel="stylesheet" href="../../lib/jquery/plugin/jqm/1.0/jquery.mobile-1.0.css" />
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script>
+			$(document).bind("mobileinit", function() {
+				$.mobile.pushStateEnabled = false;
+			});
+		</script>
+		<script src="../../lib/jquery/plugin/jqm/1.0/jquery.mobile-1.0.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			$('#linkBtn').click(function(){
+				$.mobile.changePage('top_.html');
+			});
+		</script>
+		<button type="button" id="linkBtn">SVGのページ</button>
+	</body>
+</html>

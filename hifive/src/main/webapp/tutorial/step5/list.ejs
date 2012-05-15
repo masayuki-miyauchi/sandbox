@@ -1,0 +1,7 @@
+<script type="text/ejs" id="list">
+[% for (var i = 1, len = num + 1; i < len; i++) { %]
+<li>
+	<span style="[%= 'color: ' + (i % 2 === 0 ? 'blue;': 'red;') %]">[%= i %]</span>
+</li>
+[% } %]
+</script>

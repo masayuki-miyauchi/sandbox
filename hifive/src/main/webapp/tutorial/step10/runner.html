@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../jquery-ui/lib/jquery-ui-1.8.15.custom.min.js"></script>
+		<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../../lib/ejs/ejs.js"></script>
+
+		<link rel="stylesheet" href="../../test/lib/qunit/qunit.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="../../test/lib/qunit/qunit.js"></script>
+
+		<!-- 各モジュールのソースJSを読み込む（h5.jsは必ず最初に読み込む必要がある） -->
+		<script src="../../release/h5.js"></script>
+		<script src="youtube-logic.js"></script>
+
+		<!-- 各モジュールのテストケースJSを読み込む -->
+		<script src="youtube-logic-test.js"></script>
+
+		<title>hifive YouTube検索サンプルテスト</title>
+	</head>
+	<body>
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+		<h1 id="qunit-header">hifive YouTube検索サンプルテスト</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+		<div id="qunit-fixture">test markup, will be hidden</div>
+	</body>
+</html>

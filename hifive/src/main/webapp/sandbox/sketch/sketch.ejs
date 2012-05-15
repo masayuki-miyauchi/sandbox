@@ -1,0 +1,79 @@
+<script type="text/ejs" id="sketch">
+下地：<br>
+<div id="backgroundImgContainer">
+	<div class="backgroundPiece">
+		<img src="images/floorMap.png" class="backgroundImg" style="width: 100%; height: 100%;"/>
+	</div>
+	<div class="backgroundPiece">
+		<img src="images/pc1.jpg" class="backgroundImg" style="width: 100%; height: 100%;"/>
+	</div>
+	<div class="backgroundPiece">
+		<img src="images/pc2.jpg" class="backgroundImg" style="width: 100%; height: 100%;"/>
+	</div>
+</div>
+
+<br>
+保存されたスナップショット：
+<div id="snapshotContainer"></div>
+
+<div class="command">
+	<a href="javascript:void(0);" data-role="button" id="load" data-inline="true" data-theme="b">読み込む</a>
+<div class="right">
+	<a href="javascript:void(0);" data-role="button" id="clear"data-inline="true">クリア</a>
+	<a href="javascript:void(0);" data-role="button" id="save" data-inline="true" data-theme="b">保存</a>
+</div>
+<div class="clear"></div>
+</div>
+
+<div id="sketchContainer">
+	<canvas id="sketchCanvas" width="[%= width %]" height="[%= height %]"></canvas>
+</div>
+<br />
+<div id="sketchTool" class="fixContents">
+	<div id="handle"></div>
+	<div>
+		<button id="drawModeSwitch">ON</button>
+	</div>
+	<div id="lineWidthTool" class="lineTool">
+		<button class="toolLabel" id="lineWeight">太さ</button>
+        <div class="toolContents">
+            <input type="text" id="lineWidthValue" value="[%= lineWidth %]" readOnly />
+            [% if(enableInputRange){ %]
+                <input type="range" id="lineWidth" min="1" max="40" value="[%= lineWidth %]" style="width: 350px;"/>
+			[% } else { %]
+                <div id="rangeBar" style="background-color:gray; height:2px; width:300px; margin-right:60px; position:relative; left:42px; bottom:31px"></div>
+                <div id="rangeSlider" style="background-color:gray; height:48px; width:25px; position:relative; bottom:56px; left:72px"></div>
+			[% } %]
+		</div>
+	</div>
+	<div id="lineColorTool" class="lineTool">
+		<button class="toolLabel" id="lineColor">色</button>
+		<div class="toolContents">
+			<div class="lineColorPiece centering" style="background-color: #000000;">
+				<input type="hidden" value="#000000" />
+			</div>
+			<div class="lineColorPiece centering" style="background-color: #FFFFFF;">
+				<input type="hidden"value="#FFFFFF" />
+			</div>
+			<div class="lineColorPiece centering lineColorSelected" style="background-color: #FF0000;">
+				<input type="hidden" value="#FF0000" />
+			</div>
+			<div class="lineColorPiece centering" style="background-color: #0000FF;">
+				<input type="hidden" value="#0000FF" />
+			</div>
+			<div class="lineColorPiece centering" style="background-color: #FFFF00;">
+				<input type="hidden" value="#FFFF00" />
+			</div>
+			<div class="lineColorPiece centering" style="background-color: #008000;">
+				<input type="hidden" value="#008000" />
+			</div>
+		</div>
+	</div>
+</div>
+</script>
+
+<script type="text/ejs" id="snapshot">
+<div class="snapshot">
+	<img src="[%= src %]" class="snapshotImg" style="width: 100%;"/>
+</div>
+</script>

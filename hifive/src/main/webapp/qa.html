@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=980">
+
+<meta name="author" content="NS Solutions Corporation">
+<meta name="copyright" content="Copyright (C) 2012 NS Solutions Corporation, All Rights Reserved.">
+
+<link rel="shortcut icon" href="/ja/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/ja/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/ja/apple-touch-icon.png">
+
+<title>hifive - HTML5とスマートフォンのための開発プラットフォーム</title>
+
+<link rel="stylesheet" href="css/frame.css" type="text/css" />
+
+<!-- [begin] Page CSS -->
+
+<style>
+.qaitem {
+	padding-bottom: 1em;
+	border: 1px;
+}
+
+.question {
+	font-size: 16px;
+	color: #e44d26;
+	font-style: italic;
+	font-weight: bold;
+	border-left: 4px solid #FFC864;
+	border-bottom: 1px solid #FFC864;
+	padding-left: 5px;
+	padding-bottom: 4px;
+}
+.answer {
+	font-size: 12pt;
+	color: black;
+	margin-top: 20px;
+}
+
+.answer .item {
+	font-size: 16px;
+	color: #2B833A;
+	font-style: italic;
+	font-weight: bold;
+	padding-right: 1em;
+}
+
+.qaitem a{
+    text-decoration: none;
+}
+.qaitem a:hover{
+    text-decoration: underline;
+}
+.qaitem a:link{
+    color: #116e84;
+}
+.qaitem a:visited{
+    text-decoration: none;
+    color: #995d30;
+}
+
+.index a:visited {
+	color: #2B833A;
+}
+
+.index a:link {
+	color: #2B833A;
+}
+
+.index a {
+	text-decoration: none;
+}
+
+.index a:hover{
+    text-decoration: underline;
+}
+ul.index{
+    font-size: 90%;
+}
+</style>
+
+<!-- [end] Page CSS -->
+
+<!--[if lt IE 9]>
+<script src="lib/modernizr.js"></script>
+<![endif]-->
+
+<!-- [begin] Page Scripts -->
+
+<script src="lib/jquery/jquery.js"></script>
+
+<!-- [end] Page Scripts -->
+
+</head>
+<body>
+<header>
+    <a href="./"><img src="images/logo.png" width="319" height="112"></a>
+    <nav>
+        <ul class="globalNavSub">
+            <li><a href="qa.html">Q&amp;A</a></li>
+            <li><a href="devch/index.html">h5.dev.ch</a></li>
+            <li><a href="http://blog.htmlhifive.com/">blog</a></li>
+        </ul>
+
+        <ul class="globalNavMain">
+            <li><a href="recipe.html">recipe</a></li>
+            <li><a href="tutorial/step01.html">tutorial</a></li>
+            <li><a href="reference/index.html">reference</a></li>
+            <li><a href="doc/h5.html">API docs</a></li>
+            <li><span class="comingSoon">guide</span></li>
+            <li class="headerDownload"><a href="/lets/download">download</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="contents">
+    <h1>FAQ</h1>
+
+    <ul class="index">
+        <li><a href="#00" >Q:なぜ「hifive」という名前なのですか？</a></li>
+        <li><a href="#01" >Q:HTML5って何ですか？</a></li>
+        <li><a href="#03" >Q:どの様な機能を提供してくれますか？</a></li>
+        <li><a href="#04" >Q:サポートするプラットフォームは何ですか？</a></li>
+        <li><a href="#05" >Q:JavaScriptフォールバックが必要な場合の適用性は？</a></li>
+        <li><a href="#06" >Q:親和性の良いUIライブラリは？(jQuery系ならOK？)</a></li>
+        <li><a href="#07" >Q:メンバーの内訳、スキルセットは？また、学習の進め方を教えて下さい</a></li>
+        <li><a href="#08" >Q:jQuery単体だとこう書くがhifiveだとこう書くといった例はありますか？</a></li>
+        <li><a href="#09" >Q:jQueryのこの書き方はhifiveでは使ってはいけないといった例はありますか？</a></li>
+        <li><a href="#10" >Q:Velocity、JSPとの住み分けはどう考えれば良いですか？</a></li>
+        <li><a href="#11" >Q:ASP.NET MVCとの組み合わせは可能ですか？</a></li>
+        <li><a href="#12" >Q:Web Formsとの組み合わせは可能ですか？</a></li>
+        <li><a href="#13" >Q:使用する際、許諾を得る必要はありますか？</a></li>
+    </ul>
+
+    <div class="qaitem"><a id="00"></a>
+        <h2 class="question">Q:なぜ「hifive」という名前なのですか？</h2>
+        <div class="answer">
+        <span class="item">A:</span>
+ハイファイブとは、2人が同時に頭の高さで手を合わせる称賛・祝勝を意味するジェスチャー、いわゆる「ハイタッチ」の事です。<br>
+HTML5を適用したシステムが、開発者とユーザーがハイファイブできる、<br>
+あるいはお客さんとハイファイブでカットオーバーを迎えられる<br>
+ものになると良いなという思いを込めて命名しています。
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="01"></a>
+        <h2 class="question">Q:HTML5って何ですか？</h2>
+        <div class="answer">
+            <span class="item">A1:</span>現在、W3Cで策定が進められている、次世代のWeb標準です(現在勧告されているのはHTML4.01)。
+            <ul>
+            <li>狭義には、様々な拡張(文書構造を表すタグやフォーム部品(種類)の追加、各要素の意味・意図の明確化など)が行われたHTMLの新バージョン、ですが、
+            <li>広義には、これに加えて
+                <ul>
+                <li>より高い表現力(CSS3, SVG, Canvas...)
+                <li>データの永続化(IndexedDB, WebStorage...)
+                <li>サーバとの通信方法(XMLHttpRequest Lv2, WebSocket)
+                <li>端末機能との連携(Geolocation)
+                </ul>
+            など様々な関連仕様を含んだ言葉として使用されています。(現状では広義で使われる事が多いです)
+            </ul>
+
+            参考： <a href="http://www.w3.org/TR/html5/">策定中のHTML5仕様（http://www.w3.org/TR/html5/）</a>
+        </div>
+        <div class="answer">
+            <span class="item">A2:</span>HTML5は果物です。熟し過ぎるのを待っていると、収穫の時期を逃します。
+        </div>
+        <div class="answer">
+            <span class="item">A3:</span>HTML5は生ものです。食べたい時に(本日中に)お召し上がりになるのが最適です。
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="03"></a>
+        <h2 class="question">Q:どのような機能を提供してくれますか？</h2>
+        <div class="answer">
+            <span class="item">A:</span>フレームワークのランタイムは
+            <ul>
+                <li>Core MVC Structure…MVC機構の骨格
+                <li>HTML5 APIs…HTML5 APIを使い易くするためのラッパー(及び開発支援機構)
+                <li>UI Containers / UI Components…半完成品のコンポーネント部品
+                <li>SmartPhone Supplements…スマートフォン開発を行う為のチップス集(サンプル、雛形として提供)
+                <li>Data Sync…サーバ側データ層との連携機能(ver.1.0.0では未実装)
+            </ul>
+            モジュールに分類され、各々機能を提供します。<br>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="04"></a>
+        <h2 class="question">Q:サポートするプラットフォームは何ですか？</h2>
+        <div class="answer">
+            <span class="item">A:</span>各モジュール毎のサポートとなります。<br>
+            Core MVC Structureは、jQueryのサポートするプラットフォームに準じる事を目指しています。<br>
+
+            → <a href="http://docs.jquery.com/Browser_Compatibility"></a><br>
+            HTML5 APIsは、各ブラウザの対応状況に準じます<br>
+            また、jQuery-mobile等のライブラリと組み合わせる場合は、そちらの確認も必要です。<br>
+
+            → <a href="http://jquerymobile.com/gbs/">http://jquerymobile.com/gbs/</a>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="05"></a>
+        <h2 class="question">Q:JavaScriptフォールバックが必要な場合の適用性は？</h2>
+        <div class="answer">
+            <span class="item">A1:</span>基本的なフォールバック
+            （ブラウザごとの差異の吸収：リスナー登録の際addEventListener/attachEventを呼び分ける等）は、<br>
+            主にjQueryを利用する形で行っています。
+        </div>
+
+        <div class="answer">
+            <span class="item">A2:</span>ブラウザが機能を提供するもの(主にHTML5 APIs関係)については基本ブラウザの仕様に準じますが、<br>
+            JavaScriptで対応できる範囲で、ブラウザによる差異を吸収しています。<br>
+            例) web strageにおける、オブジェクトの永続化機能
+        </div>
+
+        <div class="answer">
+            <span class="item">A3:</span>一方、「そもそもJavaScriptが動作しないよう設定されている環境」の場合の<br>
+            フォールバックについては、現在のところ検討されていません。<br>
+
+            → <a href="http://msdn.microsoft.com/ja-jp/library/hh273396(v=vs.85).aspx">http://msdn.microsoft.com/ja-jp/library/hh273396(v=vs.85).aspx</a>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="06"></a>
+        <h2 class="question">Q:親和性の良いUIライブラリは？(jQuery系ならOK？)</h2>
+        <div class="answer">
+            <span class="item">A:</span>はい、jQueryプラグインとの連携を想定し、サンプルを作成しています。<br>
+
+            → <a href="recipe.html">recipe jQuery Mobileとの連携・jQuery UIとの連携</a><br>
+
+            又、<br>
+            Controller.own(func)<br>
+            メソッドを利用する事で、既存のUIライブラリのコールバックとして、コントローラ内のメソッドを渡す事ができます。<br>
+            注: 本メソッドはリリース版にて、名前が変更される可能性があります。<br>
+
+            → <a href="doc/Controller.html">API docs/Controller.html</a>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="07"></a>
+        <h2 class="question">Q:メンバーの内訳、スキルセットは？また、学習の進め方を教えて下さい</h2>
+        <div class="answer">
+        <span class="item">A:</span>大きくは
+        <ol>
+        <li>hifiveを使った開発を、業務APチームに展開されるAP共通チームの方
+        <li>hifive上に、独自のUIコンポーネントを構築される方
+        <li>hifiveを使って担当分の業務APを作成される方
+        </ol>
+
+        に分けられるかと思います。
+        <ol>
+        <li>の方は、以下参考図書、実装規約を元に、ある程度の規模でJavaScript開発を行う為の開発マナーを習得する必要があります。
+        <li>の方は、1.に加え、hifiveの用意する拡張ポイントを理解する必要があります。(場合によっては、コミュニティに参加し→質問、議論して下さいませ)
+        <li>の方は、チュートリアルを一通り学ばれる事で、以下、実装規約や、1.の方の出される案件固有の実装ルール、実装サンプルに基づいた開発を始める事ができるでしょう。
+        </ol>
+
+        → <a href="tutorial/step01.html">チュートリアル01.準備</a>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="08"></a>
+        <h2 class="question">Q:jQuery単体だとこう書くがhifiveだとこう書くといった例はありますか？</h2>
+        <div class="answer">
+            <span class="item">A:</span>コントローラ内でDOM要素を選択するとき、jQueryの「$()」をそのまま使用するのではなく、<br>
+            コントローラ内で使えるthis.$find()メソッドを使用してください。<br>
+
+            → <a href="tutorial/step05.html">チュートリアル05.ビュー操作>単一要素の操作</a>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="09"></a>
+        <h2 class="question">Q:jQueryのこの書き方はhifiveでは使ってはいけないといった例はありますか？</h2>
+        <div class="answer">
+            <span class="item">A1:</span>イベントハンドラの登録処理は、基本、コントローラにおけるイベントハンドラ定義以外では行わないで下さい。<br>
+            コントローラを対象要素へ、バインド/アンバインドする際のメモリリークを回避する為です。<br>
+            (jQuery-mobileを利用し、Ajax遷移でページを移動する際、特に注意が必要です。)
+        </div>
+        <div class="answer">
+            <span class="item">A2:</span>hifiveでは、コードの記述レベルの統一、テスト容易性、保守性向上などの観点から、<br>
+            原則として画面操作（DOM操作）は「コントローラ」でのみ行うよう定めています。<br>
+            したがって、「ロジック」では画面操作を行わないようにしてください。<br>
+
+            → <a href="tutorial/step06.html#capture722131">チュートリアル06.ロジック &gt; どうしてロジックで画面操作をしてはいけないの？</a>
+        </div>
+        <div class="answer">
+            <span class="item">A3:</span>複数のタグからなるビューを作成するときは、
+            JavaScriptコード中にタグ文字列を書くのではなく、テンプレートの使用を検討してください。<br>
+
+            → <a href="tutorial/step05.html#capture322535">チュートリアル05.ビュー操作 &gt; 複雑なビューの生成（テンプレートの使用）</a>
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="10"></a>
+        <h2 class="question">Q:Velocity、JSPとの住み分けはどう考えれば良いですか？</h2>
+        <div class="answer">
+        <span class="item">A:</span>
+            動的な画面の生成処理を、
+            <ol>
+            <li>サーバ側で行いたいか？
+            <li>クライアント側で行いたいか？
+            </ol>
+            で判断します。<br>
+
+            サーバから取得した情報を、クライアント側で(複数画面に渡って)データとして取扱いたい場合は、<br>
+            2.の手段を選択した方が良いでしょう。<br>
+
+            それ以外の場合であれば、(1.での開発に慣れているメンバーで開発を行う際は)<br>
+            1.を選択しても良いでしょう。
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="11"></a>
+        <h2 class="question">Q:ASP.NET MVCとの組み合わせは可能ですか？</h2>
+        <div class="answer">
+            <span class="item">A:</span>Razor構文で記述された.NET MVCのビューエンジンは、サーバ側でHTMLを動的に生成します。<br>
+            このため、上記「Q:Velocity、JSPとの住み分けは？」と同様使い分けを行う事が可能です。<br>
+
+            また、Razor構文では、HTMLを生成する際、ID等のキーとなる属性も指定する事ができますので、<br>
+            hifiveを使って、クライアント側での動的な変更機能を併用することも可能です。
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="12"></a>
+        <h2 class="question">Q:Web Formsとの組み合わせは可能ですか？</h2>
+        <div class="answer">
+        <span class="item">A:</span>Web Formsは、動的に(独自の規範に則った)HTMLファイルを画面として生成します。<br>
+            この際、HTMLのID属性等、キーとなる項目も動的に生成されるため、<br>
+            hifiveを用いクライアント側で変更を加えるには不向きであり、併用はあまり、お勧めできません。
+        </div>
+    </div>
+
+    <div class="qaitem"><a id="13"></a>
+        <h2 class="question">Q:使用する際、許諾を得る必要はありますか？</h2>
+        <div class="answer">
+            <span class="item">A:</span>個別に許諾を得る必要はありません。<span>
+            <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></span>に従ってお使いください。
+        </div>
+    </div>
+
+</div>
+
+<nav id="globalFooterNav">
+    <ul>
+        <li><a href="./">home</a></li>
+        <li><a href="recipe.html">recipe</a></li>
+        <li><a href="tutorial/step01.html">tutorial</a></li>
+        <li><a href="reference/index.html">reference</a></li>
+        <li><a href="doc/h5.html">API doc</a></li>
+        <li><span class="comingSoon">guide</span></li>
+        <li><a href="/lets/download">download</a></li>
+        <li><a href="qa.html">Q&amp;A</a></li>
+        <li><a href="devch/index.html">h5.dev.ch</a></li>
+        <li><a href="http://blog.htmlhifive.com/">blog</a></li>
+    </ul>
+</nav>
+<footer>
+    <ul class="notices">
+        <li><a href="notices.html#copyright">サイトのご利用にあたって</a></li>
+        <li><a href="notices.html#escape_clause">免責事項</a></li>
+        <li><a href="notices.html#privacy_policy">プライバシーポリシー</a></li>
+        <li><a href="notices.html#trademark">商標・登録商標について</a></li>
+    </ul>
+    <small class="footerCopyright">Copyright (C) 2012 NS Solutions Corporation, All Rights Reserved.</small>
+</footer>
+</body>
+</html>

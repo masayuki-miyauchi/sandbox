@@ -1,0 +1,165 @@
+<!-- CONTENTS_CSS_BEGIN -->
+<link rel="stylesheet" href="css/article.css" type="text/css" />
+<!-- CONTENTS_CSS_END -->
+<!-- CONTENTS_MAIN_BEGIN -->
+<div id="contents">
+	<ul class="menu tutorialIndex">
+		<li><a href="step00.html" title="00.はじめに">00.はじめに</a></li>
+		<li><a href="step01.html" title="01.準備">01.準備</a></li>
+		<li><a href="step02.html" title="02.MVC構造">02.MVC構造</a></li>
+		<li><a href="step03.html" title="03.HelloWorld">03.HelloWorld</a></li>
+		<li><a href="step04.html" title="04.コントローラ">04.コントローラ</a></li>
+		<li><a href="step05.html" title="05.ビュー操作">05.ビュー操作</a></li>
+		<li><a href="step06.html" title="06.ロジック">06.ロジック</a></li>
+		<li><a href="step07.html" title="07.非同期処理">07.非同期処理</a></li>
+		<li><a href="step08.html" title="08.テスト">08.テスト</a></li>
+		<li><a href="step09.html" title="09.ドキュメント記述・生成(JSDoc)">09.ドキュメント記述・生成(JSDoc)</a></li>
+		<li><a href="step10.html" title="10.サンプルアプリ（動画検索アプリの作成）">10.サンプルアプリ（動画検索アプリの作成）</a></li>
+		<li><a href="step11.html" title="11.スマートフォン対応（jQueryMobileとの連携）">11.スマートフォン対応（jQueryMobileとの連携）</a></li>
+		<li><a href="step12.html" title="12.HTML5APIの利用">12.HTML5APIの利用</a></li>
+        <li><a href="step13.html" title="13.AOP(アスペクトの適用)">13.AOP(アスペクトの適用)</a></li>
+	</ul>
+	<h1 class="title">チュートリアル00.はじめに</h1>
+	<div class="contents contents2">
+		<input type="hidden" name="contents2Level" value="0"><input
+			type="hidden" name="contents2Filter" value=""><input
+			type="hidden" name="contents2Count" value="-1"><input
+			type="hidden" name="contents2CountLevel" value="0">
+		<ul class="list1">
+			<li><a href="#capture025482">はじめに </a></li>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture125482">参考図書 </a></li>
+		</ul>
+	</div>
+	<p>
+		このチュートリアルでは、HTML5を活用した次世代Webクライアント開発基盤「<span class="strong">hifive</span>」の<br>
+	</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>処理レイヤーの分離（MVC構造）</li>
+		<li>ドキュメント生成を意識したコメントの書き方</li>
+		<li>テスト</li>
+		<li>スマートフォン対応</li>
+	</ul>
+	<p>など様々な仕掛け・機能・規約についてその基本を説明します。</p>
+	<p>
+		<span
+			style="font-size: 20px; display: inline; line-height: 130%; text-indent: 0px">⇒<a
+			href="step01.html" title="チュートリアル01.準備">早く中身を見たい方はこちら！</a></span>
+	</p>
+	<a class="anchor_super" id="capture025482"></a><h2>
+		はじめに
+	</h2>
+	<p>
+		GmailやGoogle MapなどのリッチなWebアプリケーションの登場、<br>スマートフォンに代表される（ケータイ向けでない）完全なWebブラウジングが可能な端末の爆発的普及等に伴って、<br>リッチなWebアプリケーションを開発するニーズは高まるばかりです。
+	</p>
+	<p>
+		これを実現するために必須となるのが、「<span class="strong">HTML5</span>」「<span
+			class="strong">JavaScript</span>」「<span class="strong">CSS3</span>」等のキーワードに代表される、<br>各種の次世代標準Web技術です。<br>中でも、動的でリッチなクライアントを実現するためには、<span
+			class="strong">JavaScriptによるコーディングが必要不可欠</span>になります。
+	</p>
+	<p>
+		最近では、多くのWebシステムでユーザビリティ向上・機能性向上のためにJavaScriptが使われています。<br>入力チェックやドロップダウンリスト連携などは定番の機能ですし、<br>実際これらの機能は使い勝手を良くしてくれます。<br>
+	</p>
+	<p>
+		ところが、それを推し進めてもっとインタラクティブなシステムを作ろうとなると<br>急に及び腰になってしまうことが多いのが現状です。<br>昨今のコンシューマ向けWebアプリの進化は目覚ましく、一昔前のネイティブアプリケーション並み、あるいは<br>それ以上の使い勝手や機能性を持ったアプリケーションも登場してきています。<br>しかし、そのエッセンスを業務システムに取り入れようと思うと<br>「<span
+			class="strong">JavaScript（を多用したシステム開発）は難しい、大変そう</span>」となってしまいます。
+	</p>
+	<p>では、具体的には何が問題なのでしょうか？</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>言語仕様的にJavaやC#などクラス指向のオブジェクト指向言語と異なる点がある
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>柔軟な記述が可能な反面、属人的・トリッキーなコードになってしまいやすい</li>
+			</ul>
+		</li>
+		<li>ブラウザにより仕様や挙動が異なる
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>本質的にはJavaScript自体の問題ではないが、実際に実装する場合には大きな問題</li>
+			</ul>
+		</li>
+		<li>非同期処理になる部分が多く、コードが煩雑になりがち</li>
+		<li>コードは確かにほとんどのプラットフォームで動くが、実際には画面サイズが違うだけでレイアウトを変えたり遷移を調整する必要がある</li>
+	</ul>
+	<p>といった実装にまつわる問題から</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>保守・メンテナンスが大変
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>画面操作・計算ロジックなどコードがごちゃごちゃしがち</li>
+				<li>多人数で開発していると、人によって書き方が違って「どこに何が書いてあるか」を把握するだけでも一苦労</li>
+			</ul>
+		</li>
+		<li>特定の（スキルのある）少数に依存しがちで、管理・コントロールが難しい</li>
+	</ul>
+	<p>といったプロジェクト管理面に関わる問題まで様々です。</p>
+	<p>これらは結果としてコストや開発の体制等に影響を与え、</p>
+	<div style="text-align: center">
+		<span class="strong">入力チェックなどを単発で書いているうちはよいが、本格的にリッチな画面を作ろうとするとハードルが高い</span><br>
+	</div>
+	<div style="text-align: center">
+		<span class="strong">様々なプラットフォームに対応しようとすると苦労が多い</span>
+	</div>
+	<p>というイメージにつながってしまっています。</p>
+	<div style="text-align: center">
+		<span style="color: blue; background-color:"><span
+			style="font-size: 16px; display: inline; line-height: 130%; text-indent: 0px"><span
+				class="strong">hifiveは、この「マルチプラットフォームに対応した本格的なリッチWebクライアント」の<br
+					class="spacer">開発のハードルを下げるべく登場した開発基盤です。
+			</span></span></span>
+	</div>
+	<p>
+		開発プロジェクトによって、どの程度の機能をクライアント側で実現するかは異なります。<br>GPSによる位置情報の取得・ローカルデータベース操作・動的画面書き換え・アニメーション等々<br>最新機能を駆使したアプリケーションを開発したい場合もあれば、<br>機能的にそれほどリッチでなくとも、多人数で開発するのでコードのレベルを統一し品質のばらつきを抑えたい・<br>保守性を向上させたいという場合もあるでしょう。<br>あるいは、<span
+			class="strong">スマートフォン対応Webサイトを作りたい</span>、というニーズも多いと思われます。
+	</p>
+	<p>
+		このようにプロジェクトによって要求特性が異なることを鑑み、<br>hifiveはモジュール指向で開発されており、必要なモジュールを組み合わせ<br>各プロジェクトに最適な開発基盤にテーラリングできるようになっています。<br>勿論、「数百の個別APIを自由に選んでください」といった「自由すぎて逆に困る」ようなものではなく、<br>「機能セット」の単位でまとめていますので、テーラリングも容易です。
+	</p>
+	<p>
+		開発生産性や実装の管理性・保守性を向上させるためには、開発ツールの充実も重要です。<br>hifiveでは、コード補完、単体テスト、コードカバレッジなど、様々な開発ツールも準備しています。<br>自製のもの、OSSのものを組み合わせていますが、OSSの選定にあたってはWeb上で情報を得やすいものを中心に選んでいます。
+	</p>
+	<p>
+		hifiveは、まだ生まれたばかりです。<br>コードの記述レベルの統一から、スマートフォン・スレート・PCなど多種多様な端末に柔軟に対応するアプリケーションコンポーネントまで、次世代リッチWebクライアントを現実のものにするためのプラットフォームとして、皆様と一緒に成長させていきたいと考えています。<br>
+	</p>
+	<div style="text-align: center">
+		<p
+			style="font-size: 18px; display: inline; line-height: 130%; text-indent: 0px">
+			<br>hifiveの世界へようこそ！<br>⇒<a href="step01.html">チュートリアル01.準備</a>
+		</p>
+	</div>
+	<a class="anchor_super" id="capture125482"></a><h2>
+		参考図書
+	</h2>
+	<p>
+		今までWebアプリケーション開発でサーバーサイドロジックやビュー層のJSP/HTMLに携わってきた方の中には、<br>「JavaScriptはなんとなく知っているけど、きちんと勉強したことがない、<br>たくさんのコードを書いたわけではないので不安だ」という方も多いかと思います。<br>入門者向けWebサイトもたくさんありますので検索して探すのもよいと思いますが、<br>ここでは、まとまった情報源として以下の本をご紹介します。
+	</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li><span class="strong">JavaScript本格入門～モダンスタイルによる基礎からAjax・jQueryまで～（技術評論社）</span>
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li><a
+					href="http://www.amazon.co.jp/JavaScript%E6%9C%AC%E6%A0%BC%E5%85%A5%E9%96%80-%EF%BD%9E%E3%83%A2%E3%83%80%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8B%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89Ajax%E3%83%BB%EF%BD%8AQuery%E3%81%BE%E3%81%A7-%E5%B1%B1%E7%94%B0-%E7%A5%A5%E5%AF%9B/dp/4774144665"
+					rel="nofollow">Amazon</a></li>
+				<li>変数・関数の宣言方法や構文など基礎的な内容からスタートし、名前空間を意識した書き方・スコープ・jQueryの簡単な使い方など実際にコードを書くときに有用な情報までがまとまっています。一通りの知識を得るための一冊として良いと思われます。<br>JavaやC#など他の言語経験がある方であれば、既存の知識と照らし合わせながら読んでいくことができるでしょう。
+				</li>
+			</ul></li>
+	</ul>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li><span class="strong">パーフェクトJavaScript（技術評論社）</span>
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li><a
+					href="http://www.amazon.co.jp/%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88JavaScript-PERFECT-4-%E4%BA%95%E4%B8%8A-%E8%AA%A0%E4%B8%80%E9%83%8E/dp/477414813X"
+					rel="nofollow">Amazon</a></li>
+				<li>プロトタイプチェーン・スコープチェーン・クロージャの細かい仕様・挙動など、詳細な内容について書かれた本です。<br>JavaScriptベースでAP基盤を設計する場合など、JavaScriptについて詳細な知識が必要となる方にお勧めします。
+				</li>
+			</ul></li>
+	</ul>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li><span class="strong">JavaScript 第5版（オライリー）</span>
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li><a href="http://www.oreilly.co.jp/books/9784873113296/"
+					rel="nofollow">オライリー</a></li>
+				<li>「JavaScript: The Definitive Guide, Fifth
+					Edition」の日本語版。「サイ本」と呼ばれ、細部まで記述された定番の一冊と言われています。<br>こちらも、JavaScriptについて詳細な知識が必要となる方にお勧めします。
+				</li>
+			</ul></li>
+	</ul>
+</div>
+<!-- CONTENTS_MAIN_END -->

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<link type="text/css" href="../jquery-ui/lib/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />
+		<link type="text/css" href="lib/ui.jqgrid.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../release/h5.css"/>
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../jquery-ui/lib/jquery-ui-1.8.15.custom.min.js"></script>
+		<script src="lib/grid.locale-ja.js"></script>
+		<script src="lib/jquery.jqGrid.src.js"></script>
+		<script src="../../lib/ejs/ejs.js"></script>
+		<!-- 各モジュールのソースJSを読み込む（h5.jsは必ず最初に読み込む必要がある） -->
+		<script src="../../release/h5.js"></script>
+		<script src="jqgrid.js"></script>
+
+		<title>hifive jqGrid Sample</title>
+	</head>
+	<body>
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+		<div id="container" style="border: 1px solid; padding: 30px;">
+			<table id="grid" class="scroll"></table>
+			<div id="pager" class="scroll" style="text-align:center;"></div>
+
+			<br />
+			<input type="button" id="addData" name="addData" value="データ追加"/>
+		</div>
+	</body>
+</html>

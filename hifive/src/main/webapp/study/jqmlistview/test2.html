@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, minimum-scale=1, maximum-scale=1">
+<title>jqm controller</title>
+<link rel="stylesheet" href="../../release/h5.css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+<script src="lib/jquery.mobile.fixed.js"></script>
+<script src="../../release/h5.dev.js"></script>
+<script>
+	window.jqminited = window.jqminited || h5.ui.jqm.manager.init() || true;
+window.jqminited = true;
+    $(document).bind('pageremove', function(){
+        alert('pageremove');
+    });
+    $(document).bind('pagehide', function(){
+        alert('pagehide');
+    });
+
+</script>
+</head>
+<body>
+	<div id="test2" data-role="page">
+		<div data-role="header">
+			<H1>test2</h1>
+		</div>
+		<div data-role="content">
+            <a href="test1.html" data-direction="reverse" data-role="button"
+                data-theme="b">test1へ戻る</a>
+            <a href="#sub" data-role="button"
+                data-theme="b">sub</a>
+		</div>
+	</div>
+	<div id="sub" data-role="page" data-theme="g" >
+		<div data-role="header" data-theme="b">
+			aa
+		</div>
+		<div data-role="content">
+			aa
+		</div>
+	</div>
+</body>
+</html>

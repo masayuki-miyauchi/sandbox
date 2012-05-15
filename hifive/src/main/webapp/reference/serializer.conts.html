@@ -1,0 +1,306 @@
+<!-- CONTENTS_CSS_BEGIN -->
+<link rel="stylesheet" href="css/article.css" type="text/css" />
+<link type="text/css" rel="stylesheet"
+	href="../lib/syntaxhighlighter/styles/SyntaxHighlighter.css"></link>
+<!-- CONTENTS_CSS_END -->
+<!-- CONTENTS_SCRIPT_BEGIN -->
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		dp.SyntaxHighlighter.ClipboardSwf = '../lib/syntaxhighlighter/scripts/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	}
+</script>
+<!-- CONTENTS_SCRIPT_END -->
+<!-- CONTENTS_MAIN_BEGIN -->
+<div id="contents">
+	<h1 class="title">シリアライザ</h1>
+	<p>hifiveが提供するシリアライザ・デシリアライザ（h5.u.obj.serialize()/deserialize()）の仕様を説明します。</p>
+	<a class="anchor_super" id="capture030687"></a><h2>
+		概要
+	</h2>
+	<p>データを、型情報を付与した文字列に変換します。判定可能な型は、以下のとおりです。</p>
+	<table class="style_table" cellspacing="1" border="0">
+		<tbody>
+			<tr>
+				<td class="style_td" style="">string</td>
+				<td class="style_td" style="">文字列</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">number</td>
+				<td class="style_td" style="">数値</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">boolean</td>
+				<td class="style_td" style="">真偽値</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">array</td>
+				<td class="style_td" style="">配列</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">object</td>
+				<td class="style_td" style="">プレーンオブジェクト</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Date</td>
+				<td class="style_td" style="">日付</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">RegExp</td>
+				<td class="style_td" style="">正規表現</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">undefined</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">null</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">NaN</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Infinity</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">-Infinity</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">stringのラッパークラス</td>
+				<td class="style_td" style="">new String()で生成したオブジェクト</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">numberのラッパークラス</td>
+				<td class="style_td" style="">new Number()で生成したオブジェクト</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">booleanのラッパークラス</td>
+				<td class="style_td" style="">new Boolean()で生成したオブジェクト</td>
+			</tr>
+		</tbody>
+	</table>
+	<a class="anchor_super" id="capture130687"></a><h3>
+		シリアライズ
+	</h3>
+	<p>シリアライズは、バージョンなどの情報を含むヘッダを付加します。ヘッダの後に、型情報文字、文字列化したデータが続きます。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>ヘッダ情報 + | + 型情報文字(1byte) + 文字列化したデータ</li>
+	</ul>
+	<a class="anchor_super" id="capture230687"></a><h4>
+		ヘッダ
+	</h4>
+	<p>現在の仕様におけるヘッダは"1"です。</p>
+	<a class="anchor_super" id="capture330687"></a><h4>
+		文字列化
+	</h4>
+	<p>オブジェクトを、1byteの型情報文字＋文字列化したデータに変換します。</p>
+	<table class="style_table" cellspacing="1" border="0">
+		<tbody>
+			<tr>
+				<td class="style_td" style="">型</td>
+				<td class="style_td" style="">型情報文字</td>
+				<td class="style_td" style="">値</td>
+				<td class="style_td" style="">文字列化</td>
+				<td class="style_td" style="">備考</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">string</td>
+				<td class="style_td" style="">s</td>
+				<td class="style_td" style="">hello</td>
+				<td class="style_td" style="">shello</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">number</td>
+				<td class="style_td" style="">n</td>
+				<td class="style_td" style="">1, -1.23</td>
+				<td class="style_td" style="">n1, n-1.23</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">boolean</td>
+				<td class="style_td" style="">b</td>
+				<td class="style_td" style="">true, false</td>
+				<td class="style_td" style="">b1, b0</td>
+				<td class="style_td" style="">true=1, false=0に変換します</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Date</td>
+				<td class="style_td" style="">d</td>
+				<td class="style_td" style="">new Date()</td>
+				<td class="style_td" style="">d1331698922654</td>
+				<td class="style_td" style="">getTime()の値を使います</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">RegExp</td>
+				<td class="style_td" style="">r</td>
+				<td class="style_td" style="">/a*/g</td>
+				<td class="style_td" style="">r/a*/g</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">undefined</td>
+				<td class="style_td" style="">u</td>
+				<td class="style_td" style="">undefined</td>
+				<td class="style_td" style="">u</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">null</td>
+				<td class="style_td" style="">l</td>
+				<td class="style_td" style="">null</td>
+				<td class="style_td" style="">l</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">NaN</td>
+				<td class="style_td" style="">N</td>
+				<td class="style_td" style="">NaN</td>
+				<td class="style_td" style="">x</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Infinity</td>
+				<td class="style_td" style="">i</td>
+				<td class="style_td" style="">Infinity</td>
+				<td class="style_td" style="">i</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">-Infinity</td>
+				<td class="style_td" style="">I</td>
+				<td class="style_td" style="">-Infinity</td>
+				<td class="style_td" style="">I</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Array</td>
+				<td class="style_td" style="">a</td>
+				<td class="style_td" style="">[1,'hello']</td>
+				<td class="style_td" style="">a["n1","shello"]</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Object</td>
+				<td class="style_td" style="">o</td>
+				<td class="style_td" style="">{ a: 'A', b: 2 }</td>
+				<td class="style_td" style="">o{"a":"sA","b":"n2"}</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Stringのラッパークラス</td>
+				<td class="style_td" style="">S</td>
+				<td class="style_td" style="">new String('hello')</td>
+				<td class="style_td" style="">Shello</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Numberのラッパークラス</td>
+				<td class="style_td" style="">N</td>
+				<td class="style_td" style="">new Number(123), new Number(NaN)</td>
+				<td class="style_td" style="">N123, Nx</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="style_td" style="">Booleanのラッパークラス</td>
+				<td class="style_td" style="">B</td>
+				<td class="style_td" style="">new Boolean(true), new
+					Boolean(false)</td>
+				<td class="style_td" style="">B1, B0</td>
+				<td class="style_td" style="">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>[配列またはオブジェクト]中の[配列またはオブジェクト]は、'"'と'\'をエスケープして表現します。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>例
+			<ul class="list2" style="padding-left: 12px; margin-left: 12px">
+				<li>[[1 ,2, 3], 4, 5] → a["a[\"n1\",\"n2\",\"n3\"]","n4","n5"]</li>
+				<li>{ary:[1, [2, 3]], obj:{a:'A'}} →
+					o{"ary":"a[\"n1\",\"a[\\\"n2\\\",\\\"n3\\\"]\"]","obj":"o{\"a\":\"sA\"}"}</li>
+			</ul>
+		</li>
+	</ul>
+	<p>serialize()メソッドが返す値は、次のようになります。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>serialize(123) → 1|n123</li>
+		<li>serialize('null') → 1|snull</li>
+		<li>serialize(null) → 1|l</li>
+		<li>serialize([1,NaN,Infinity,'4']) →1|a["n1","x","i","s4"]</li>
+	</ul>
+	<a class="anchor_super" id="capture430687"></a><h3>
+		オブジェクト
+	</h3>
+	<p>オブジェクトはプレーンオブジェクトとしてシリアライズします。渡されたオブジェクトがプレーンオブジェクトでない場合、そのprototypeやconstructorは無視されます。デシリアライズで復元されたオブジェクトは必ずプレーンオブジェクトです。</p>
+	<a class="anchor_super" id="capture530687"></a><h3>
+		連想配列
+	</h3>
+	<p>配列は連想配列も含めてシリアライズします。連想配列部分はオブジェクトと同様の方法で文字列化し、'@'を文字列化した文字にの先頭に付け、配列の最後の要素に加えます。'@'は連想配列としてマッピングされたオブジェクトを表す指定子として扱います。</p>
+	<pre name="code" class="js">var a = [0,1];
+a['a'] = 'A';</pre>
+	<p>このような配列 a をシリアライズすると次のようになります。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>1|a["n0","1","@{\"a\":\"sA\"}"]</li>
+	</ul>
+	<p>デシリアライズの際に、'@'指定子のある要素を、"連想配列としてマッピングするオブジェクト"として評価します。</p>
+	<a class="anchor_super" id="capture630687"></a><h3>
+		循環参照
+	</h3>
+	<p>循環参照を含む配列またはオブジェクトはシリアライズできません。エラーが発生します。</p>
+	<a class="anchor_super" id="capture730687"></a><h3>
+		同一インスタンスの扱い
+	</h3>
+	<p>配列またはオブジェクトが内部に同一インスタンスを持つ場合、シリアライザはそれらを別インスタンスとして扱います。</p>
+	<pre name="code" class="js">var a = [];
+a[0] = a[1] = [];
+var b = h5.u.obj.deserialize(h5.u.obj.serialize(a));
+&nbsp;
+// a[0]とa[1]は同一インスタンスだが、b[0]とb[1]は同一インスタンスではない。
+a[0][0] = 1 // [Array[1], Array[1]]
+b[0][0] = 1 // [Array[1], Array[0]]</pre>
+	<a class="anchor_super" id="capture830687"></a><h3>
+		配列中のundefined
+	</h3>
+	<pre name="code" class="js">var a = [0,undefined,,3];</pre>
+	<p>このような配列の場合、a[1]とa[2]は共にundefinedですが、a.hasOwnProperty(1)がtrueなのに対し、a.hasOwnProperty(2)はfalseです。このような場合も区別してシリアライズします。上記の
+		a をシリアライズすると以下のようになります。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>1|a["n0","_","u","n3]</li>
+	</ul>
+	<p>"u"は値としてのundefinedを表しますが、"_"は配列中の未定義によるundefinedを表します。</p>
+	<pre name="code" class="js">var a = [];
+a[5] = 5;</pre>
+	<p>このような a をシリアライズすると、以下のようになります。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>1|a["_","_","_","_","_","n5"]</li>
+	</ul>
+	<a class="anchor_super" id="capture930687"></a><h3>
+		関数型
+	</h3>
+	<p>関数型のオブジェクトはシリアライズできません。エラーが発生します。配列中に関数があった場合、undefinedとしてシリアライズします。オブジェクトまたは連想配列中に関数があった場合は無視されます。</p>
+	<pre name="code" class="js">var a = [];
+a['func'] = function(){};
+&nbsp;
+var b = [function(){}, , 2];
+b['func'] = function(){};
+b['num'] = 1;
+&nbsp;
+var c = { func: function(){} }</pre>
+	<p>このような a b c はそれぞれ以下のようにシリアライズされます。</p>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>1|a[]</li>
+		<li>1|a["u","_","n2","@{\"num\":\"n1\"}"]</li>
+		<li>1|o{}</li>
+	</ul>
+</div>
+<!-- CONTENTS_MAIN_END -->

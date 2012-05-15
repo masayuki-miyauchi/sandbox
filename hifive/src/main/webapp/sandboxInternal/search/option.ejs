@@ -1,0 +1,5 @@
+<script type="text/ejs" id="option">
+[% for (var i = 0, len = result.length; i < len; i++) { %]
+<option value="[%= result[i] %]" [% if (current === result[i]) { %] selected="true" [% } %]>[%= result[i] %]</option>
+[% } %]
+</script>

@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=980">
+
+<meta name="author" content="NS Solutions Corporation">
+<meta name="copyright" content="Copyright (C) 2012 NS Solutions Corporation, All Rights Reserved.">
+
+<link rel="shortcut icon" href="/ja/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/ja/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/ja/apple-touch-icon.png">
+
+<title>hifive - HTML5とスマートフォンのための開発プラットフォーム</title>
+
+<link rel="stylesheet" href="../css/frame.css" type="text/css" />
+
+<!-- [begin] Page CSS -->
+
+<link rel="stylesheet" href="css/article.css" type="text/css" />
+<link type="text/css" rel="stylesheet"
+	href="../lib/syntaxhighlighter/styles/SyntaxHighlighter.css"></link>
+
+<!-- [end] Page CSS -->
+
+<!--[if lt IE 9]>
+<script src="../lib/modernizr.js"></script>
+<![endif]-->
+
+<!-- [begin] Page Scripts -->
+
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript"
+	src="../lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		dp.SyntaxHighlighter.ClipboardSwf = '../lib/syntaxhighlighter/scripts/clipboard.swf';
+		dp.SyntaxHighlighter.HighlightAll('code');
+	}
+</script>
+
+<!-- [end] Page Scripts -->
+
+</head>
+<body>
+<header>
+    <a href="../"><img src="../images/logo.png" width="319" height="112"></a>
+    <nav>
+        <ul class="globalNavSub">
+            <li><a href="../qa.html">Q&amp;A</a></li>
+            <li><a href="../devch/index.html">h5.dev.ch</a></li>
+            <li><a href="http://blog.htmlhifive.com/">blog</a></li>
+        </ul>
+
+        <ul class="globalNavMain">
+            <li><a href="../recipe.html">recipe</a></li>
+            <li><a href="../tutorial/step01.html">tutorial</a></li>
+            <li><a href="../reference/index.html">reference</a></li>
+            <li><a href="../doc/h5.html">API docs</a></li>
+            <li><span class="comingSoon">guide</span></li>
+            <li class="headerDownload"><a href="/lets/download">download</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="contents">
+	<ul class="menu tutorialIndex">
+		<li><a href="step01.html" title="01.準備">01.準備</a></li>
+		<li><a href="step02.html" title="02.MVC構造">02.MVC構造</a></li>
+		<li><a href="step03.html" title="03.HelloWorld">03.HelloWorld</a></li>
+		<li><a href="step04.html" title="04.コントローラ">04.コントローラ</a></li>
+		<li><a href="step05.html" title="05.ビュー操作">05.ビュー操作</a></li>
+		<li><a href="step06.html" title="06.ロジック">06.ロジック</a></li>
+		<li><a href="step07.html" title="07.非同期処理">07.非同期処理</a></li>
+		<li><a href="step08.html" title="08.テスト">08.テスト</a></li>
+		<li><a href="step09.html" title="09.ドキュメント記述・生成(JSDoc)">09.ドキュメント記述・生成(JSDoc)</a></li>
+		<li><a href="step10.html" title="10.サンプルアプリ（動画検索アプリの作成）">10.サンプルアプリ（動画検索アプリの作成）</a></li>
+		<li><a href="step11.html" title="11.スマートフォン対応（jQueryMobileとの連携）">11.スマートフォン対応（jQueryMobileとの連携）</a></li>
+		<li><a href="step12.html" title="12.HTML5APIの利用">12.HTML5APIの利用</a></li>
+        <li><a href="step13.html" title="13.AOP(アスペクトの適用)">13.AOP(アスペクトの適用)</a></li>
+	</ul>
+	<h1 class="title">チュートリアル07.非同期処理</h1>
+	<div class="contents contents2">
+		<input type="hidden" name="contents2Level" value="0"><input
+			type="hidden" name="contents2Filter" value=""><input
+			type="hidden" name="contents2Count" value="-1"><input
+			type="hidden" name="contents2CountLevel" value="0">
+		<ul class="list1">
+			<li><a href="#capture025489"> 概要 </a></li>
+			<ul class="list2">
+				<li><a href="#capture125489"> 実装例 </a></li>
+				<li><a href="#capture225489"> 動作確認 </a></li>
+			</ul>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture325489"> jQuery Deferred APIについて </a></li>
+			<ul class="list2">
+				<li><a href="#capture425489"> deferred.promise </a></li>
+				<li><a href="#capture525489"> deferred.resolve </a></li>
+				<li><a href="#capture625489"> deferred.done </a></li>
+				<li><a href="#capture725489"> deferred.reject </a></li>
+				<li><a href="#capture825489"> deferred.fail </a></li>
+				<li><a href="#capture925489"> deferred.notify </a></li>
+				<li><a href="#capture1025489"> deferred.progress </a></li>
+				<li><a href="#capture1125489"> deferred.notify,
+						deferred.progressの実装例 </a></li>
+				<li><a href="#capture1225489"> 動作確認 </a></li>
+			</ul>
+		</ul>
+		<ul class="list1">
+			<li><a href="#capture1325489"> よくある質問 </a></li>
+			<ul class="list2">
+				<li><a href="#capture1425489">ロジックのAPIの粒度はどう考えるべき？ </a></li>
+				<li><a href="#capture1525489">処理の進行途中で画面に反映させたい場合はどうすればいい？
+				</a></li>
+				<li><a href="#capture1625489">最終的な処理完了までに非常に時間がかかる・データ量が多くなる場合はどうすればいい？
+				</a></li>
+			</ul>
+		</ul>
+	</div>
+	<a class="anchor_super" id="capture025489"></a><h2>
+		概要
+	</h2>
+	<p>ここでは、操作性が高く使い勝手の良いリッチな画面を実現するために必須となる、非同期処理の取り扱いについて説明します。</p>
+	<a class="anchor_super" id="capture125489"></a><h3>
+		実装例
+	</h3>
+	<p>以下は、画面で選択されたカテゴリと一致する商品情報をサーバから取得する例です。</p>
+	<pre name="code" class="js">function ItemSearchLogic() {}
+&nbsp;
+ItemSearchLogic.prototype = {
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ロジック名
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;__name: 'ItemSearchLogic',
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品リスト(商品名と税込価格)を取得する。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;getItemList: function(categoryId) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dfd = this.deferred();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var result = null;
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this._getItemData(categoryId).done(function(data) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = $.map(data, function(obj) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.price = Math.floor(obj.price * 1.05);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return obj;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.resolve(result);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(function(error) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.reject(error.message);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return dfd.promise();
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* カテゴリIDから商品(商品名と税抜価格)リストをサーバから取得する。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;_getItemData: function(categoryId) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $.ajax({ // [ {"itemname":"hoge", "price": "1000"}, ...] のようなJSONオブジェクトを返す
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: 'GET',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType: 'json',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: './itemList',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: 'categoryId=' + categoryId
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};</pre>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>15行目のgetItemListメソッドはパブリックメソッドです。コントローラから呼ばれることを想定しています。<br>このように、データを取得するメソッドと取得したデータに対して処理を行うメソッドと役割を分けて作成することで、getItemListとは異なる処理を行いたい場合は、データを取得するメソッド(_getItemData)はそのままで処理を行うメソッドのみを新規に作成すればよいだけなので、修正が容易です。
+		</li>
+	</ul>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>16行目でDeferredオブジェクトを作成しています。ロジックのステップにも記述しましたが、ロジック化されると、フレームワークによって<span
+			class="strong">deferred</span>メソッドが追加されます。
+		</li>
+		<li>29行目でPromiseオブジェクトを返しています。</li>
+	</ul>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>38行目の<span class="strong">$.ajax</span>は、jQueryで用意されているAjax通信を行うためのメソッドです。ajaxメソッドの戻り値はPromiseオブジェクトなので、14行目の<span
+			class="strong">this._getItemData(categoryId).done()</span>のように、doneメソッドで非同期処理の結果を取得することができます。なお、エラーはfailメソッドで取得することができます。
+		</li>
+	</ul>
+	<pre name="code" class="js">&nbsp;&nbsp;&nbsp;&nbsp;var itemSearchController = {
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* コントローラ名
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;__name: 'ItemSearchController',
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* テンプレート
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;__templates: 'template.ejs',
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品検索ロジック
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;itemSearchLogic: new ItemSearchLogic(),
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 検索ボタン押下アクション
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;'#searchBtn click': function(context) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $resultDiv = this.$find('#resultList');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var that = this;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$resultDiv.empty();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 画面で選択されたカテゴリ
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var category = $('#select-category option:selected').val();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.itemSearchLogic.getItemList(category).done(function(resultData) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.view.append($resultDiv, 'template1', {listData: resultData});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(function(errMsg) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('取得に失敗しました' + errMsg);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};
+&nbsp;
+h5.core.controller('#container', itemSearchController);</pre>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>26行目でAsyncLogic#getItemListを実行しています。戻り値はPromiseオブジェクトです。</li>
+		<li>27行目でPromiseオブジェクトのdoneコールバックにロジックの非同期処理後のコントローラの処理を記述しています。<br>ここでは、Ajaxで取得したデータを、一覧としてテンプレートを使用して画面に出力しています。
+		</li>
+	</ul>
+	<a class="anchor_super" id="capture225489"></a><h3>
+		動作確認
+	</h3>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li><a href="./step7-1/step7-1.html" rel="nofollow">チュートリアル/step7-1</a></li>
+		<li><a href="../recipe.html" rel="nofollow">デモサイトトップ</a></li>
+	</ul>
+	<a class="anchor_super" id="capture325489"></a><h2>
+		jQuery Deferred APIについて
+	</h2>
+	<p>
+		hifiveの非同期制御で用いるDeferredはjQueryのDeferred APIをベースにしています。<br>jQueryのDeferred
+		APIで提供されている機能は基本的にすべて利用可能です。
+	</p>
+	<p>ここではjQuery Deferredの基本的なAPIを紹介します。</p>
+	<a class="anchor_super" id="capture425489"></a><h3>
+		deferred.promise
+	</h3>
+	<pre name="code" class="js">deferred.promise([target]);</pre>
+	<p>
+		Promiseオブジェクトを返します。<br>ターゲットを指定すると、そのオブジェクトにPromiseオブジェクトが持つメソッドを付与して返します。
+	</p>
+	<a class="anchor_super" id="capture525489"></a><h3>
+		deferred.resolve
+	</h3>
+	<pre name="code" class="js">deferred.resolve(var_args);</pre>
+	<p>
+		Deferred(遅延)がresolve(解決)されると、deferred.thenまたはdeferred.doneによって追加されたdoneCallbacksが呼び出されます。<br>コールバックは、追加された順序で実行されます。resolveメソッドは可変長引数を取ることができ、指定されたパラメータは登録されたすべてのdoneCallbacksの引数として渡されます。
+	</p>
+	<a class="anchor_super" id="capture625489"></a><h3>
+		deferred.done
+	</h3>
+	<pre name="code" class="js">deferred.done(doneCallbacks [, doneCallbacks]);</pre>
+	<p>
+		resolveが実行されると、doneメソッドを使って登録されたdoneCallbacksが追加された順序で実行されます。<br>
+	</p>
+	<a class="anchor_super" id="capture725489"></a><h3>
+		deferred.reject
+	</h3>
+	<pre name="code" class="js">deferred.reject(var_args);</pre>
+	<p>
+		Deferred(遅延)がreject(拒否)されると、deferred.thenまたはdeferred.failによって追加されたfailCallbacksが呼び出されます。<br>コールバックは、追加された順序で実行されます。rejectメソッドは可変長引数を取ることができ、指定されたパラメータは登録されたすべてのfailCallbacksの引数として渡されます。
+	</p>
+	<a class="anchor_super" id="capture825489"></a><h3>
+		deferred.fail
+	</h3>
+	<pre name="code" class="js">deferred.fail(failCallbacks[, failCallbacks]);</pre>
+	<p>
+		rejectが実行されると、failメソッドを使って登録されたfailCallbacksが追加された順序で実行されます。<br>
+	</p>
+	<a class="anchor_super" id="capture925489"></a><h3>
+		deferred.notify
+	</h3>
+	<pre name="code" class="js">deferred.notify(var_args);</pre>
+	<p>
+		Deferred(遅延)がnotify(通知)されると、deferred.thenまたはdeferred.progressによって追加されたprogressCallbacksが呼び出されます。<br>コールバックは、追加された順序で実行されます。notifyメソッドは可変長引数を取ることができ、指定されたパラメータは登録されたすべてのprogressCallbacksの引数として渡されます。
+	</p>
+	<a class="anchor_super" id="capture1025489"></a><h3>
+		deferred.progress
+	</h3>
+	<pre name="code" class="js">deferred.progress(progressCallbacks[, progressCallbacks]);</pre>
+	<p>
+		notifyが実行されると、progressメソッドを使って登録されたprogressCallbacksが追加された順序で実行されます。<br>
+	</p>
+	<h3>
+		deferred.notify, deferred.progressの実装例 <a class="anchor_super"
+			id="capture1125489"></a>
+	</h3>
+	<p>7-1の実装例にnotify, progressを使ったコードを追記します。</p>
+	<pre name="code" class="js">&nbsp;&nbsp;&nbsp;&nbsp;ItemSearchLogic.prototype = {
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ロジック名
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;__name: 'ItemSearchLogic',
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品リスト(商品名と税込価格)を取得する。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;getItemList: function(categoryId) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dfd = this.deferred();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var result = null;
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this._getItemData(categoryId).done(function(data) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = $.map(data, function(obj) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.notify(data.length);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.price = Math.floor(obj.price * 1.05);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return obj;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.resolve(result);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(function(error) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.reject(error.message);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return dfd.promise();
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* カテゴリIDから商品(商品名と税抜価格)リストをサーバから取得する。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;_getItemData: function(categoryId) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $.ajax({ // [ {"itemname":"hoge", "price": "1000"}, ...] のようなJSONオブジェクトを返す
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: 'GET',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType: 'json',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: './itemList',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: 'categoryId=' + categoryId
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};</pre>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>25行目でdeferred.notifyを使用しています。データ1件に対する税込金額の計算が完了した件数を画面に通知しています。<br>今回の例では、簡単な処理のため処理がすぐに終了してしまいますが、時間のかかる処理を実行中に、途中経過をユーザに通知したりする場合に役立ちます。
+		</li>
+	</ul>
+	<pre name="code" class="js">var itemSearchController = {
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* コントローラ名
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;__name: 'ItemSearchController',
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* テンプレート
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;__templates: 'template.ejs',
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品検索ロジック
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;itemSearchLogic: new ItemSearchLogic(),
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 検索ボタン押下アクション
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;'#searchBtn click': function(context) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.blockParent({message: '検索中…'}, 'blockGlobal');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 画面で選択されたカテゴリ
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var category = $('#select-category option:selected').val();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var $resultDiv = this.$find('#resultList');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var that = this;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var count = 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$resultDiv.empty();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.itemSearchLogic.getItemList(category).done(function(resultData) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.view.append($resultDiv, 'template1', {listData: resultData});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.unblockParent('unblockGlobal');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(function(errMsg) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('取得に失敗しました' + errMsg);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.unblockParent('unblockGlobal');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).progress(function(total) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.blockUI span').contents().filter(function() {return this.nodeType == 3;}).parent().text('検索中… '+ ++count +'/'+ total);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};
+&nbsp;
+h5.core.controller('#container', itemSearchController);</pre>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li>34行目でdeferred.progressを使用しています。</li>
+		<li>35行目でprogressCallbacksとして完了した処理の件数が画面に表示される処理が追加されています。</li>
+	</ul>
+	<a class="anchor_super" id="capture1225489"></a><h3>
+		動作確認
+	</h3>
+	<ul class="list1" style="padding-left: 12px; margin-left: 12px">
+		<li><a href="./step7-2/step7-2.html" rel="nofollow">チュートリアル/step7-2</a></li>
+		<li><a href="../recipe.html" rel="nofollow">デモサイトトップ</a></li>
+	</ul>
+	<a class="anchor_super" id="capture1325489"></a><h2>
+		よくある質問
+	</h2>
+	<a class="anchor_super" id="capture1425489"></a><h3>
+		ロジックのAPIの粒度はどう考えるべき？
+	</h3>
+	<p>
+		1つの非同期処理は1メソッドとした方が良いでしょう。<br>Deferredを使ってさえいれば、非同期処理の順番が変わったり、間に別の非同期処理を追加しなければならなくなった場合でも柔軟に対応できます。
+	</p>
+	<h3>
+		処理の進行途中で画面に反映させたい場合はどうすればいい？ <a class="anchor_super"
+			id="capture1525489"></a>
+	</h3>
+	<p>
+		Deferredにはnotify()というメソッドがあり、最終的な完了通知の前に進捗を通知することができます。<br>Deferredでnotify()メソッドを呼ぶとPromiseのprogress()で登録したコールバック関数が呼ばれるので、<br>この仕組みを利用して画面を書き換えるとよいでしょう。
+	</p>
+	<p>
+		notify()メソッドは引数にオブジェクトをとることができ、渡したオブジェクトは<br>progress()でセットしたコールバック関数の引数に渡されるので、データに基づいた画面更新も可能です。
+	</p>
+	<h3>
+		最終的な処理完了までに非常に時間がかかる・データ量が多くなる場合はどうすればいい？ <a class="anchor_super"
+			id="capture1625489"></a>
+	</h3>
+	<p>progress()等を使うことで途中でコールバックを呼べるので、ロジックのAPIとしては「処理したいものがたくさんあるときは、配列やオブジェクトで一括で渡し、必要に応じてprogress()する」ようにするのが良いでしょう。</p>
+	<div class="spacer">&nbsp;</div>
+	<div class="spacer">&nbsp;</div>
+	<div style="text-align: center">
+		<span
+			style="font-size: 18px; display: inline; line-height: 130%; text-indent: 0px">次のステップ⇒<a
+			href="step08.html">チュートリアル08.テスト</a></span>
+	</div>
+
+</div>
+
+<nav id="globalFooterNav">
+    <ul>
+        <li><a href="../">home</a></li>
+        <li><a href="../recipe.html">recipe</a></li>
+        <li><a href="../tutorial/step01.html">tutorial</a></li>
+        <li><a href="../reference/index.html">reference</a></li>
+        <li><a href="../doc/h5.html">API doc</a></li>
+        <li><span class="comingSoon">guide</span></li>
+        <li><a href="/lets/download">download</a></li>
+        <li><a href="../qa.html">Q&amp;A</a></li>
+        <li><a href="../devch/index.html">h5.dev.ch</a></li>
+        <li><a href="http://blog.htmlhifive.com/">blog</a></li>
+    </ul>
+</nav>
+<footer>
+    <ul class="notices">
+        <li><a href="../notices.html#copyright">サイトのご利用にあたって</a></li>
+        <li><a href="../notices.html#escape_clause">免責事項</a></li>
+        <li><a href="../notices.html#privacy_policy">プライバシーポリシー</a></li>
+        <li><a href="../notices.html#trademark">商標・登録商標について</a></li>
+    </ul>
+    <small class="footerCopyright">Copyright (C) 2012 NS Solutions Corporation, All Rights Reserved.</small>
+</footer>
+</body>
+</html>

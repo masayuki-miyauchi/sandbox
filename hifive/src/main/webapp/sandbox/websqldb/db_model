@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clay-model clay-version="2.0.1">
+<database-model author="" begin-script="" end-script="" id="1ee37ed:135cbad0fb1:-8000" name="db_model" sql-dialect-id="jp.azzurri.clay.dialect.SQLite_3_5_6_Dialect" version="1.0">
+<schema-list>
+<schema id="1ee37ed:135cbad0fb1:-7ffd" name="DEFAULT_SCHEMA">
+<table-list>
+<table alias="PRODUCT" id="1ee37ed:135cbad0fb1:-7fff" name="PRODUCT">
+<column-list>
+<column alias="item" auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="1ee37ed:135cbad0fb1:-7ffa" mandatory="true" name="item">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column alias="price" auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1ee37ed:135cbad0fb1:-7ff7" mandatory="true" name="price">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+</column-list>
+<primary-key id="1ee37ed:135cbad0fb1:-7ffe" name="PK_PRODUCT">
+<primary-key-column name="item"/>
+</primary-key>
+</table>
+<table alias="ACCOUNT" id="1ee37ed:135cbad0fb1:-7ff6" name="ACCOUNT">
+<column-list>
+<column alias="key" auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="1ee37ed:135cbad0fb1:-7ff2" mandatory="true" name="key">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+<column alias="date" auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="1ee37ed:135cbad0fb1:-7f7a" mandatory="true" name="date">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column alias="item" auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="1ee37ed:135cbad0fb1:-7fef" mandatory="true" name="item">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column alias="num" auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1ee37ed:135cbad0fb1:-7f7b" mandatory="true" name="num">
+<data-type name="INTEGER" selected-variant-pattern="INTEGER"/>
+</column>
+</column-list>
+<primary-key id="1ee37ed:135cbad0fb1:-7ff5" name="PK_ACCOUNT">
+<primary-key-column name="key"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="1ee37ed:135cbad0fb1:-7fba" name="FK_ACCOUNT_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PRODUCT" referenced-table="PRODUCT" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="item" referenced-key-column-name="item"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+</table-list>
+</schema>
+</schema-list>
+</database-model>
+<diagram>
+<table-figure height="85" refid="1ee37ed:135cbad0fb1:-7fff" width="168" x="126" y="116"/>
+<table-figure height="118" refid="1ee37ed:135cbad0fb1:-7ff6" width="210" x="438" y="94"/>
+</diagram>
+</clay-model>

@@ -1,0 +1,20 @@
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,.ui-li-static.ui-li-has-thumb {
+    padding-left: 10px;
+    vertical-align:middle;
+    min-height: 50px;
+}
+
+.ui-li-thumb,.ui-li-icon {
+    position: inherit;
+    width: 100px;
+    height: 120px;
+}
+
+.ui-header .ui-title {
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.index-page-search-box-table {
+	width: 100%
+}

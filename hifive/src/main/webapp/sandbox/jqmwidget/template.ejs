@@ -1,0 +1,29 @@
+<script type="text/ejs" id="fetchlistResult">
+    [%
+      var entry = response.feed.entry;
+      var ROW_COUNT = 10;
+    %]
+
+    [% for (var i = 0, len = entry.length; i < len; i++) {
+     var group = entry[i].media$group;
+     var title = group.media$title.$t;
+     var id = entry[i].id.$t;
+     var videoId = id.substring(id.lastIndexOf('/')+1, id.length);
+    %]
+    <li>
+		<a href="#page-player?videoId=[%= videoId %]&title=[%= encodeURIComponent(title) %]">
+            <img src="[%= group.media$thumbnail[0].url %]"/>
+		    <h4>[%= title %]</h4>
+		    <p>
+		      [視聴数]&nbsp;[%= entry[i].yt$statistics.viewCount %]&nbsp;&nbsp;
+		      [お気に入り数]&nbsp;[%= entry[i].yt$statistics.favoriteCount %]
+		    </p>
+            <p>[%= $.trim(group.media$description.$t) %]</p>
+        </a>
+    </li>
+    [% } %]
+
+    [%
+     setFetchCondition('start-index', parseInt(getFetchCondition('start-index')) + ROW_COUNT);
+    %]
+</script>

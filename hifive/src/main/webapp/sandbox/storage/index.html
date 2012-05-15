@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<link rel="stylesheet" href="../../release/h5.css"/>
+		<style type="text/css">
+		#app{
+			width: 800px;
+		}
+		.set{
+			margin:0px;
+			width: 366px;
+			height:200px;
+			padding-left: 30px;
+			border: 1px dashed #eecc44;
+			float: left;
+		}
+		.set h4{
+			margin-left: -20px;
+		}
+		a{
+			text-decoration:none;
+			color: #A35A00;
+		}
+		a:hover{
+			font-weight: bold;
+		}
+		</style>
+		<title>Storage Test</title>
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../../release/h5.js"></script>
+		<script src="sample.storage.js"></script>
+	</head>
+	<body>
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+		<div id="app">
+			<div id="desc">
+				<h2>Web Storageサンプル</h2>
+				<p>
+					Web Storageはクライアントにkey-valueペアのデータを保存するための機能です。cookieとよく似ていますが、
+					「永続的にデータを持たせられる」「大容量のデータを保存できる」という特徴があります。
+					Web StorageにはLocal StorageとSession Storageの2種類あります。
+					Local Storageは永続的にデータを保持できるのに対し、Session Storageはセッションスコープでデータを保持します。
+					Session Storageはブラウザを閉じるとデータが消えます。
+				</p>
+				<p>
+					標準のWeb Strorage APIでは今現在では文字列しか保存することができません。
+					オブジェクトをJSON型に変換して格納することはできますが、Date型やRegExp(正規表現)型などはその型を維持したまま保存して取り出すことができません。
+				</p>
+				<p>
+					hifiveのAPIを使うことで、型を保持したまま追加して取り出すことができます。
+					使用可能な型は<a href="../../doc/h5.api.storage.local.html#setItem" target="_blank">h5.api.storage.local#setItem</a>(APIドキュメント)をご覧ください。
+
+					h5.api.storageのチェックを外すと、APIを使わずに追加/取得する挙動を確認できます。
+				</p>
+			</div>
+			<div id="operation" style="border:2px outset #cccc99; border-bottom:0px; background-color:lemonchiffon">
+					<div class="del" style="float:right;">
+						削除するキー:<input type="text" id="removeStorageKey" />
+						<input type="button" value="削除" id="remove"/>
+					</div>
+					<input type="radio" value="local" name="storage" checked="checked"/>Local Storage
+					<input type="radio" value="session" name="storage" />Session Storage
+					<br>
+					<input type="checkbox" value="api" name="checkApi" checked/>h5.api.storage
+					<br>
+					<div class="set">
+						<h4>文字列</h4>
+						<div>キー:<input type="text" class="storageKey" value="sample_str"/>
+						</div>
+						<div>値:<input type="text" id="storageStrValue" value="文字列"/></div>
+						<input type="button" value="追加" id="addInput"/>
+					</div>
+					<div class="set">
+						<h4>オブジェクト</h4>
+						<div>キー:<input type="text" class="storageKey" value="sample_object"/></div>
+						<div style="background-color:white; width:220px; padding:4px">
+<pre>sampleObj = {
+	str: 'test',
+	num: 10
+}</pre>
+						</div>
+						<input type="button" value="追加" id="addObject"/>
+					</div>
+					<div class="set">
+						<h4>配列</h4>
+						<div>キー:<input type="text" class="storageKey" value="sample_array"/></div>
+						<div style="background-color:white; width:220px; padding:4px">
+<pre>
+[1, "two", 3]
+</pre>
+						</div>
+						<input type="button" value="追加" id="addArray"/>
+					</div>
+					<div class="set">
+						<h4>Date型</h4>
+						<div>キー:<input type="text" class="storageKey" value="sample_date"/></div>
+						<div style="background-color:white; width:220px; padding:4px">
+<pre>new Date()</pre>
+						</div>
+						<input type="button" value="追加" id="addDate"/>
+					</div>
+					<div class="set">
+						<h4>正規表現</h4>
+						<div>キー:<input type="text" class="storageKey" value="sample_RegExp"/></div>
+							値：new RegExp('<input type="text" id="storageRegExpValue" value="hel+o!*"/>')
+							<br>
+							<input type="button" value="追加" id="addRegExp"/>
+					</div>
+					<div class="set">
+						<h4>すべて削除</h4>
+						<input type="button" value="すべて削除" id="allDelete"/>
+					</div>
+					<div style="clear:both;"></div>
+			</div>
+			<div id="resultWrap" style="border-top:2px outset #cccc99; background-color:lemonchiffon">
+					<h4>Storage</h4>
+					<div style="border:1px dashed #eecc44; padding:10px;">
+						値を取得ボタンをクリックしてから以下のボタンで挙動を確認できます。<br>
+						<button class="doAlert">alert(value)</button>
+						<button class="doConsole">console.log(value)</button>
+						<button class="doGetFullYear">alert(value.getFullYear())</button>Date型用
+						<button class="doRegExp">alert('hello!!world!!'.match(value))</button>正規表現用
+					</div>
+					<br>
+					<input type="button" value="非表示" id="toggleResult"/><br>
+					<input type="button" value="リロード" id="reloadView"/>ストレージを再取得します。APIの使用/不使用が反映されます。
+					<div id="result"><table></table></div>
+			</div>
+		</div>
+	</body>
+</html>

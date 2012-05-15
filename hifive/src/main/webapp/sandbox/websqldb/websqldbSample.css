@@ -1,0 +1,108 @@
+
+
+#product{
+	float: left;
+ 	margin-right: 50px;
+}
+
+table {
+ border-collapse: collapse;
+ border-top: 1px solid #555;
+ border-left: 1px solid #555;
+}
+table th, table td {
+ border-bottom: 1px solid #555;
+ border-right: 1px solid #555;
+}
+#resultTable th{
+	background-color: #eeffdd;
+}
+#resultTable th:nth-child(1){
+	width: 100px;
+}
+#resultTable th:nth-child(2){
+	width: 150px;
+}
+#resultTable th:nth-child(3){
+	width: 50px;
+}
+#resultTable th:nth-child(4){
+	width: 100px;
+	font-weight:bold;
+}
+#resultTable th:nth-child(5){
+	background-color: #cccccc
+}
+
+#productTable th{
+	background-color: #effdff;
+}
+#productTable th:nth-child(1){
+	width: 150px;
+}
+#productTable th:nth-child(2){
+	width: 100px;
+}
+#productTable th:nth-child(3){
+	background-color: #cccccc
+}
+.price{
+	text-align: right;
+}
+
+.num{
+	text-align: right;
+}
+
+.total{
+	height: 30px;
+	font-weight: bold;
+}
+#resultTable .total th{
+	text-align: center;
+	background-color: #ffeedd;
+}
+
+.edit{
+	display:none
+}
+
+.dateInput{
+	width: 100px;
+}
+.itemInput{
+	width: 150px;
+}
+.numInput{
+	width: 50px;
+	text-align: right;
+}
+
+#form{
+	border:1px solid #cccccc;
+	padding:10px;
+}
+
+.desc{
+	margin: 20px;
+}
+
+#app{
+	padding:30px;
+	margin-bottom: 30px;
+}
+
+section h2{
+    border-left:7px solid #ccc;
+    border-bottom:1px dashed #ccc;
+    padding:.6em .8em
+}
+
+a {
+	text-decoration:none;
+	color: #A35A00;
+}
+
+a:hover{
+	font-weight: bold;
+}

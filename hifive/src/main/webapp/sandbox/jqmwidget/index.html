@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../../lib/jquery/plugin/jqm/1.0/jquery.mobile-1.0.css" />
+		<link rel="stylesheet" href="../../release/h5.css"/>
+		<link rel="stylesheet" href="./index.css">
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../../lib/jquery/plugin/jqm/1.0/jquery.mobile-1.0.js"></script>
+		<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+        <script src="../../lib/ejs/ejs.js"></script>
+        <script src="../../release/h5.js"></script>
+        <script src="./fetch-list.js"></script>
+        <script src="./index-page.js"></script>
+		<title>YouTube検索(JQM版)</title>
+	</head>
+	<body>
+		<div data-role="page" id="index-page">
+			<div data-role="header" data-theme="b" >
+				<h1>YouTube検索(JQM版)</h1>
+			</div>
+			<div data-role="content">
+			    <div data-role="h5fetchlist">
+			        <form action="http://gdata.youtube.com/feeds/api/videos">
+		                <table class="index-page-search-box-table">
+		                    <tr>
+			                    <td>
+			                        <input type="search" name="vq" placeholder="キーワード"  required/>
+			                    </td>
+			                    <td>
+			                        <input type="submit" value="検索"/>
+			                    </td>
+		                    </tr>
+		                    <input type="hidden" name="start-index" value="1" />
+		                    <input type="hidden" name="max-results" value="10" />
+		                    <input type="hidden" name="alt" value="json-in-script" />
+		                </table>
+	                </form>
+	                <ul data-role="listview" data-inset="true"></ul>
+                </div>
+			</div>
+		</div>
+		<div data-role="page" id="player-page">
+		    <script src="./player-page.js"></script>
+		    <div data-role="header" data-theme="b" >
+                <a href="#index-page" data-icon="back" data-direction="reverse">戻る</a>
+                <h1></h1>
+            </div>
+            <div data-role="content">
+            </div>
+        </div>
+	</body>
+</html>

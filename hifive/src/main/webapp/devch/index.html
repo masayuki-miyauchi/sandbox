@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=980">
+
+<meta name="author" content="NS Solutions Corporation">
+<meta name="copyright" content="Copyright (C) 2012 NS Solutions Corporation, All Rights Reserved.">
+
+<link rel="shortcut icon" href="/ja/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="/ja/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon" href="/ja/apple-touch-icon.png">
+
+<title>h5.dev.ch - hifive Developer Channel. hifiveの開発状況ほか</title>
+
+<link rel="stylesheet" href="../css/frame.css" type="text/css" />
+
+<!-- [begin] Page CSS -->
+
+<style>
+
+.repository {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 25px;
+    background-color: #e9ffe5;
+    width: 300px;
+}
+
+.updatesite {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 25px;
+    background-color: #e9e9f5;
+    width: 420px;
+}
+
+.sorry {
+    font-size: 11px;
+}
+</style>
+
+<!-- [end] Page CSS -->
+
+<!--[if lt IE 9]>
+<script src="../lib/modernizr.js"></script>
+<![endif]-->
+
+<!-- [begin] Page Scripts -->
+
+
+<!-- [end] Page Scripts -->
+
+</head>
+<body>
+<header>
+    <a href="../"><img src="../images/logo.png" width="319" height="112"></a>
+    <nav>
+        <ul class="globalNavSub">
+            <li><a href="../qa.html">Q&amp;A</a></li>
+            <li><a href="../devch/index.html">h5.dev.ch</a></li>
+            <li><a href="http://blog.htmlhifive.com/">blog</a></li>
+        </ul>
+
+        <ul class="globalNavMain">
+            <li><a href="../recipe.html">recipe</a></li>
+            <li><a href="../tutorial/step01.html">tutorial</a></li>
+            <li><a href="../reference/index.html">reference</a></li>
+            <li><a href="../doc/h5.html">API docs</a></li>
+            <li><span class="comingSoon">guide</span></li>
+            <li class="headerDownload"><a href="/lets/download">download</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="contents">
+    <h1>h5.dev.ch(hifive Developer Channel)へようこそ！</h1>
+    <p>h5.dev.chは、hifiveの開発状況をお伝えするページです。</p>
+<div>
+<h2>hifiveの開発プロジェクト</h2>
+hifiveはgithub上で開発を行っています。<br>
+<div class="repository"><a href="https://github.com/hifive/hifivemain">https://github.com/hifive/hifivemain</a></div>
+<br>
+ソースコードは以下のリポジトリで公開しています。<br>
+ライセンス条件に従っていただく限り、自由にお使いいただけます。
+<div class="repository">git://github.com/hifive/hifivemain.git</div>
+</div>
+
+
+<div>
+<h2>hifiveの開発支援ツール</h2>
+hifiveを利用する際の開発支援ツールとして、Eclipseプラグインの更新サイトを公開しています。<br>
+<div class="updatesite">http://www.htmlhifive.com/eclipse-plugins/updatesite/</div>
+各プラグインの説明は<a href="../reference/eclipseplugins.html">こちら</a>。
+
+</div>
+<br>
+<hr>
+
+
+<div>
+<h2>バグを見つけたor改善要望を出したい場合</h2>
+githubのIssuesで報告していただけると助かります。<br>
+<a target="_blank" href="https://github.com/hifive/hifivemain/issues">hifiveのIssuesのページ</a>へ行き、「New Issues」ボタンを押して内容を記載してください。<br>
+サイトは英語ですが、内容・タイトルどちらも日本語を使っていただいて問題ありません。
+</div>
+
+<div>
+<h2>その他、hifiveについてのお問い合わせ</h2>
+
+<img style="vertical-align:bottom" width="210" height="21" src="../images/mailto_hifive-users.png">にお願いします。<br>
+本メーリングリストへのお問い合わせ内容は、ノウハウ共有の為公開される旨ご了承の上ご利用下さいませ。
+
+
+</div>
+<br>
+<hr>
+
+    <div>
+        <h2 class="title">テスト</h2>
+<p>hifiveは、QUnitによる単体テストを行っています。<br>
+以下のリンクからテストを実行することができます。</p>
+<p class="sorry">
+※現在ソースコードリポジトリにはこのテストコードはコミットされていません。<br>
+近日中に追加すべく鋭意作業中です。ごめんなさい...。</p>
+        <ul>
+            <li><a href="../test/runner.html">testへ (dev版)</a></li>
+            <li><a href="../test/runner.ie8.html">testへ (dev版 [IE8 Standardsモード])</a></li>
+            <li><a href="../test/runner.ie7.html">testへ (dev版 [IE7 Standardsモード])</a></li>
+            <li><a href="../test/runner.min.html">testへ (min版)</a></li>
+            <li><a href="../test/runner.min.ie8.html">testへ (min版 [IE8 Standardsモード])</a></li>
+            <li><a href="../test/runner.min.ie7.html">testへ (min版 [IE7 Standardsモード])</a></li>
+        </ul>
+    </div>
+</div>
+
+<nav id="globalFooterNav">
+    <ul>
+        <li><a href="../">home</a></li>
+        <li><a href="../recipe.html">recipe</a></li>
+        <li><a href="../tutorial/step01.html">tutorial</a></li>
+        <li><a href="../reference/index.html">reference</a></li>
+        <li><a href="../doc/h5.html">API doc</a></li>
+        <li><span class="comingSoon">guide</span></li>
+        <li><a href="/lets/download">download</a></li>
+        <li><a href="../qa.html">Q&amp;A</a></li>
+        <li><a href="../devch/index.html">h5.dev.ch</a></li>
+        <li><a href="http://blog.htmlhifive.com/">blog</a></li>
+    </ul>
+</nav>
+<footer>
+    <ul class="notices">
+        <li><a href="../notices.html#copyright">サイトのご利用にあたって</a></li>
+        <li><a href="../notices.html#escape_clause">免責事項</a></li>
+        <li><a href="../notices.html#privacy_policy">プライバシーポリシー</a></li>
+        <li><a href="../notices.html#trademark">商標・登録商標について</a></li>
+    </ul>
+    <small class="footerCopyright">Copyright (C) 2012 NS Solutions Corporation, All Rights Reserved.</small>
+</footer>
+</body>
+</html>

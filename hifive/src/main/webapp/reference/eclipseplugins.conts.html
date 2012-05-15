@@ -1,0 +1,38 @@
+<!-- CONTENTS_CSS_BEGIN -->
+<link rel="stylesheet" href="css/article.css" type="text/css" />
+<!-- CONTENTS_CSS_END -->
+<!-- CONTENTS_MAIN_BEGIN -->
+<div id="contents">
+	<p>
+		アップデートサイトURL : <span class="strong">http://www.htmlhifive.com/eclipse-plugins/updatesite</span>
+	</p>
+	<h3>コード補完プラグイン</h3>
+	<p>
+		hifiveコード補完プラグインをインストールすると以下に示すコード補完が出来るようになります。<br>
+		ただし、hifiveのコード規約、命名規約を順守している必要があります。補完対象の詳細に関してはチュートリアルを参照。
+	</p>
+	<ul>
+		<li>コントローラ</li>
+		<li>ロジック</li>
+		<li>イベントコンテキスト</li>
+		<li>イニシャライザコンテキスト</li>
+	</ul>
+	<p>例</p>
+	<pre name="code" class="js">var selectorController = {
+&nbsp;&nbsp;__name: 'SelectorController',
+&nbsp;&nbsp;'input[type=button] click': function(context) {
+&nbsp;&nbsp;&nbsp;&nbsp;this. //このthisはコントローラ(selectorController)なのでコントローラの補完を出す
+&nbsp;&nbsp;&nbsp;&nbsp;context. //このcontextはイベントコンテキストなのでイベントコンテキストの補完を出す
+&nbsp;&nbsp;}
+};
+</pre>
+
+	<ul>
+		<li>インストール後の設定方法<br> 特に設定することはありません。インストールすればhifiveのコード補完が機能します。<br>
+		※プロジェクトを右クリック -&gt; プロパティ -&gt;
+				hifiveCodeAssist<br>という項目がありますが、通常は空設定のままで使用できます。<br> 
+		</li>
+
+	</ul>
+</div>
+<!-- CONTENTS_MAIN_END -->

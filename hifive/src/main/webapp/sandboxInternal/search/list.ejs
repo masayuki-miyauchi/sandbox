@@ -1,0 +1,24 @@
+<script type="text/ejs" id="list">
+[% for (var i = 0, len = data.length; i < len; i++) { %]
+<li class="list" style="margin-top: 10px;">
+	<div style="height: 244px; width: 768px; background-color: #E6F7D8; border: 2px #70A230; ">
+		<div class="img_container" style="display: inline-block; height: 244px; width: 268px;">
+			<div style="height: 220px; width: 260px; margin: 10px; border: 1px solid gray;" >
+				<input type="hidden" name="imgName" value="[%= data[i].name %]" />
+			</div>
+		</div>
+		<div style="float: right; height: 200px; margin-top: 10px; width: 480px;">
+			<div>
+				<a class="title" href="[%= data[i].url %]" title="[%= data[i].name %]" style="font-size: 24px;">[%= data[i].name %]</a>
+			</div>
+			<div class="description">
+				[%= data[i].desc %]
+			</div>
+			<div class="price" style="margin-top: 10px; color: red;">
+				<span style="font-size: 10px">[最低料金]</span> [%= data[i].price %]円～
+			</div>
+		</div>
+	</div>
+</li>
+[% } %]
+</script>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<title>test</title>
+<script src="../../lib/jquery/jquery.js"></script>
+<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+<script src="../../lib/ejs/ejs.js"></script>
+<script src="../../release/h5.js"></script>
+<script>
+	// Chrome, FireFox, Operaではネイティブのスタックトレースの機能が呼ばれるため、
+	// Log#_traceFunctionName()を修正するか、IEまたはSafariで確認して下さい。
+
+	h5.log.traceFunction = true;
+
+	function aspectFunc(proceed) {
+		h5.log.debug("aspect!");
+		console.log("-------------------------------------");
+		console.log(proceed());
+		return 10;
+	}
+
+	function aspectFunc2(proceed) {
+		h5.log.debug("aspect2!");
+		console.log("-------------------------------------");
+		console.log(proceed());
+		return 20;
+	}
+
+	function baseFunc() {
+		h5.log.debug("base!");
+		console.log("-------------------------------------");
+		return 30;
+	}
+
+	function createWeavedFunction() {
+		var i = 0;
+		var funcs = [aspectFunc, aspectFunc2, baseFunc];
+
+		var proceed = function() {
+			return funcs[i++](proceed);
+		};
+
+		return proceed();
+	}
+
+	function createWeavedFunction2() {
+		var i = 0;
+		var ret = null;
+		var funcs = [aspectFunc, aspectFunc2, baseFunc];
+		var proceed = function() {
+			i++;
+		};
+
+		while (true) {
+			if (i === funcs.length - 1) {
+				funcs[funcs.length-1]();
+				break;
+			}
+
+			funcs[i](proceed);
+		}
+
+		return ret;
+	}
+
+	console.log(createWeavedFunction());
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<link rel="stylesheet" href="../../release/h5.css"/>
+		<style type="text/css">
+			.wrap {
+				border:1px solid gray;
+				margin: 20px;
+				height: 400px;
+				min-width: 1300px;
+			}
+			.wrap h2 {
+				margin-left: 20px;
+			}
+			.child {
+				margin: 20px;
+				width: 300px;
+				height: 300px;
+				border: 1px solid;
+				float:left;
+			}
+			.parent {
+				margin: 20px;
+				width: 350px;
+				height: 370px;
+				border: 1px solid;
+				float: left;
+			}
+			.sourceWrap {
+				display:block;
+			}
+			.source {
+			}
+		</style>
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../../lib/ejs/ejs.js"></script>
+
+		<!-- 各モジュールのソースJSを読み込む（h5.jsは必ず最初に読み込む必要がある） -->
+		<script src="../../release/h5.js"></script>
+		<script src="sample_controller.js"></script>
+		<script type="text/javascript">
+			function dump(msg) {
+				$('#ul').append('<li>' + msg + '</li>');
+			}
+		</script>
+
+		<title>hifive Block Sample</title>
+	</head>
+	<body>
+		<!--
+		   IE7のバグ: IE7で要素にインジケータを表示すると、インジケータを表示した要素にblockUIがposition:relativeを適用する。
+		   しかし、イジケータを表示した外側の要素にoverflowが指定されていると、インジケータを表示した要素がposition:fixedのような挙動になるので、
+		   overflowを指定している要素に対してもposition:relativeを指定しないといけない。
+		   http://hi-universe.com/element-positionrelative-inside-container-with-scroll-ie-7-bug/
+		 -->
+		<div id="main" style="height:800px; overflow:scroll; position:relative;">
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+
+		<h2>hifive Block Sample</h2>
+		<div style="font-size: 16px;">
+			hifiveのインジケータ機能のサンプルです。<br />
+		</div>
+		<br />
+
+
+		<div class="wrap">
+			<h2>自分自身をブロック</h2>
+			<div id="child1" class="child" style="background-color: #ccff55;">
+				child1
+				<br />
+				<input type="button" id="child1Block" value="child1Block" />
+			</div>
+			<div class="sourceWrap">
+				<h4>ソースコード</h4>
+				<h5>Child1Controller</h5>
+				<textarea style="width:750px; height:240px">
+'#child1Start click': function(context) {
+	dump('child1 start');
+
+	var indicator = this.indicator({
+		message: 'child1 block'
+	}).show();
+
+	// 非同期処理の中で使用するために退避
+	var dfd = this.deferred();
+
+	setTimeout(function() {
+		indicator.hide();
+		dump('child1 end');
+		dfd.resolve();
+	}, 800);
+	return dfd.promise();
+},
+				</textarea>
+			</div>
+		</div>
+
+
+	<div class="wrap" style="height: 480px">
+		<h2>親コントローラをブロック</h2>
+		<div id="parent1" class="parent" style="background-color: #87CEFA;">
+			parent<br/>
+			<div id="child2" class="child" style="background-color: yellow;">
+				child2
+				<br />
+				<input type="button" id="parentBlock" value="parentBlock" />
+			</div>
+		</div>
+			<div class="sourceWrap">
+				<h4>ソースコード</h4>
+				<h5>Child2Controller</h5>
+				<textarea style="width:750px; height:300px;">
+'#parentBlock click': function(promise, resolve, reject) {
+	dump('child2 start');
+	var indicator = this.indicator({
+		// targetに親コントローラを指定
+		target: $(this.rootElement).parent(),
+		message: 'child2 parent block'
+	}).show();
+
+	var dfd = this.deferred();
+
+	setTimeout(function() {
+		indicator.hide();
+		dump('child2 end');
+		dfd.resolve();
+	}, 2500);
+	return dfd.promise();
+},
+				</textarea>
+			</div>
+		</div>
+
+
+<div class="wrap" style="height: 980px">
+		<h2>子コントローラをブロック</h2>
+		<div id="parent2" class="parent" style="height: 780px; width: 400px; background-color: #87CEFA;">
+			parent<br/>
+			<input type="button" id="childrenBlock" value="childrenBlock" /><br/>
+			<div id="child3" class="child" style="background-color: yellow;">
+				child3</br>
+				<input type="button" id="child3Block" value="child3Block" />(clickイベント無し)
+			</div>
+			<div id="child4" class="child" style="background-color: #ccff55;">
+				child4<br/>
+				<input type="button" id="child4Block" value="child4Block" /><br/>
+			</div>
+		</div>
+			<div class="sourceWrap">
+			<h4>ソースコード</h4>
+			<h5>ParentController</h5>
+				<textarea style="width:750px; height:100px">
+'#childrenBlock click': function() {
+	// child1StartボタンのselfBlockイベント、child2Startボタンのclickイベントをトリガ.
+	$('#child3Block').trigger('selfBlock');
+	$('#child4Block').trigger('click');
+},
+				</textarea>
+				<h5>Child3Controller</h5>
+				<textarea style="width:750px; height:280px">
+// トリガーで呼ばれるイベント
+'#child3Block selfBlock': function(context) {
+	dump('child3 start');
+
+	// 自身をブロックする
+	var indicator = this.indicator({
+		message: 'child1 self block'
+	}).show();
+
+	// 非同期処理の中で使用するために退避
+	var dfd = this.deferred();
+
+	setTimeout(function() {
+		// 自身のブロックを解除
+		indicator.hide();
+		dump('child3 end');
+		dfd.resolve();
+	}, 800);
+	return dfd.promise();
+},
+				</textarea>
+				<h5>Child4Controller</h5>
+				<textarea style="width:750px; height:280px">
+'#child4Block click': function(context) {
+	dump('child4 start');
+
+	// 自身をブロックする
+	var indicator = this.indicator({
+		message: 'child1 self block'
+	}).show();
+
+	// 非同期処理の中で使用するために退避
+	var dfd = this.deferred();
+
+	setTimeout(function() {
+		// 自身のブロックを解除
+		indicator.hide();
+		dump('child4 end');
+		dfd.resolve();
+	}, 800);
+	return dfd.promise();
+},
+				</textarea>
+			</div>
+		</div>
+
+		<div class="wrap" style="height: 500px">
+			<h2>画面をブロック</h2>
+			<div id="child5" class="child" style="background-color: #ffcc77;">
+				child5
+				<br />
+				<input type="button" id="globalBlock" value="globalBlock" />
+			</div>
+			<div class="sourceWrap">
+				<h4>ソースコード</h4>
+				<h5>Child5Controller</h5>
+				<textarea style="width:900px; height:340px">
+'#globalBlock click': function(promise, resolve, reject) {
+	dump('globalBlock start');
+
+	var dfd = this.deferred();
+	// BODYをブロックする
+	var indicator = this.indicator({
+		target: document.body,
+		message: 'global block',
+		promises: dfd.promise()
+
+	}).show();
+
+	// 非同期処理の中で使用するために退避
+
+	// indicator()にpromiseオブジェクトを渡しているのでresolve()またはreject()されると自動的にindicator.hide()される
+	setTimeout(function() {
+		dump('globalBlock end');
+		dfd.resolve();
+	}, 2000);
+	return dfd.promise();
+}
+				</textarea>
+			</div>
+		</div>
+
+
+		<div class="wrap" style="height: 500px">
+			<h2>プログレスバー</h2>
+			<div id="child6" class="child" style="background-color: #ccff55;">
+				child6
+				<br />
+				<input type="button" id="child6Start" value="child6Start" />
+			</div>
+			<div class="sourceWrap">
+				<h4>ソースコード</h4>
+				<h5>Child6Controller</h5>
+				<textarea style="width:750px; height:320px">
+'#child6Start click': function(context) {
+	dump('child6 start');
+
+	// インジケータの表示
+	var indicator = this.indicator({}).show();
+
+	// Deferredオブジェクトを作成
+	var dfd = this.deferred();
+	var i = 0;
+	var id = setInterval(function() {
+		// プログレスバーの非表示
+		if (i >= 100) {
+			indicator.hide();
+			clearInterval(id);
+			dump('child6 end');
+			dfd.resolve();
+			return;
+		}
+		// 進捗状況(%)の表示
+		indicator.percent(i++);
+	}, 70);
+	return dfd.promise();
+}
+				</textarea>
+			</div>
+		</div>
+
+
+		<div class="wrap" style="height: 540px">
+			<h2>プログレスバーのメッセージを更新</h2>
+			<div id="child7" class="child" style="background-color: yellow;">
+				child7
+				<br />
+				<input type="button" id="child7Start" value="child7Start" />
+			</div>
+			<div class="sourceWrap">
+				<h4>ソースコード</h4>
+				<h5>Child7Controller</h5>
+				<textarea style="width:750px; height:380px">
+'#child7Start click': function(context) {
+	dump('child7 start');
+	// Deferredオブジェクトを作成
+	var dfd = this.deferred();
+	var indicator = this.indicator({
+		promises: dfd.promise()
+	}).show();
+	var i = 0;
+	var mes = '';
+	var id = setInterval(function() {
+		indicator.percent(++i);
+
+		// メッセージを表示
+		if (i % 10 === 0) {
+			indicator.message(mes += '■');
+		}
+
+		if (i >= 100) {
+			clearInterval(id);
+			dfd.resolve();
+			dump('child7 end');
+			return;
+		}
+	}, 30);
+
+	return dfd.promise();
+}
+				</textarea>
+			</div>
+		</div>
+
+
+		<div class="wrap" style="height: 560px">
+			<h2>複数のpromiseがresolveされるまでブロック</h2>
+			<div id="child8" class="child" style="background-color: #87CEFA;">
+				child8
+				<br />
+				<input type="button" id="child8Start" value="child8Start" />
+			</div>
+			<div class="sourceWrap">
+				<h4>ソースコード</h4>
+				<h5>Child8Controller</h5>
+				<textarea style="width:750px; height:400px">
+'#child8Start click': function(context) {
+	dump('child8 start');
+	var that = this;
+	// 4秒掛かる処理
+	var func1 = function() {
+		var df1 = that.deferred();
+
+		setTimeout(function() {
+			dump('child8 func1 end');
+			df1.resolve();
+		}, 4000);
+		return df1.promise();
+	};
+
+	// 6秒掛かる処理
+	var func2 = function() {
+		var df2 = that.deferred();
+		setTimeout(function() {
+			dump('child8 func2 end');
+			df2.resolve();
+		}, 6000);
+		return df2.promise();
+	};
+
+	// func1とfunc2が終わるのを待つので、6秒待つことになる。
+	var indicator = this.indicator({
+		promises: [func1(), func2()]
+	}).show().message('処理中...');
+}
+				</textarea>
+			</div>
+		</div>
+
+
+		</div>
+		<div id ="dump" style="margin-top: 0px;height: 200px;  overflow: scroll; overflow-x:hidden; border:solid 1px gray">
+		<h2>処理のdump</h2>
+			<ul id="ul"></ul>
+		</div>
+	</body>
+</html>

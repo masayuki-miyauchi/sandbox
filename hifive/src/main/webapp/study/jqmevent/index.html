@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../../lib/jquery/plugin/jqm/1.0/jquery.mobile-1.0.css" />
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script>
+			$(document).bind("mobileinit", function() {
+				$.mobile.pushStateEnabled = true;
+			});
+		</script>
+		<script src="../../lib/jquery/plugin/jqm/1.0/jquery.mobile-1.0.js"></script>
+		<script>
+			$(window).bind('pagecontainercreate hashchange popstate', function(ev) {
+				console.log('window:'+ ev.type);
+				console.log($.mobile.activePage ? 'activePage: \n'+ $.mobile.activePage[0].innerHTML : 'activePage: '+ undefined);
+				console.log('pageContainer: \n'+ $.mobile.pageContainer[0].outerHTML);
+				console.log('URL: '+ $.mobile.path.parseUrl(location.href).href);
+				console.log('-----------------------------------------------------------');
+			});
+
+			$('body').live('pagebeforechange pagechange', function(ev) {
+				console.log('body:'+ ev.type);
+				console.log($.mobile.activePage ? 'activePage: \n'+ $.mobile.activePage[0].innerHTML : 'activePage: '+ undefined);
+				console.log('pageContainer: \n'+ $.mobile.pageContainer[0].outerHTML);
+				console.log('URL: '+ $.mobile.path.parseUrl(location.href).href);
+				console.log('-----------------------------------------------------------');
+			});
+
+			// liveで登録: pagecreate pageshow pagebeforeshow
+			// bindで登録: pageremove webkitAnimationEnd(one)
+			$('#index-page').live('pageinit pagebeforeshow pageshow pagebeforehide pagehide pagebeforecreate pagecreate pageremove', function(ev) {
+				console.log('page:'+ ev.type +' target-id:'+ ev.target.id);
+				console.log($.mobile.activePage ? 'activePage: \n'+ $.mobile.activePage[0].innerHTML : 'activePage: '+ undefined);
+				console.log('pageContainer: \n'+ $.mobile.pageContainer[0].outerHTML);
+				console.log('URL: '+ $.mobile.path.parseUrl(location.href).href);
+				console.log('-----------------------------------------------------------');
+			});
+
+			$('#index2-page').live('pageinit pagebeforeshow pageshow pagebeforehide pagehide pagebeforecreate pagecreate pageremove', function(ev) {
+				console.log('page:'+ ev.type +' target-id:'+ ev.target.id);
+				console.log($.mobile.activePage ? 'activePage: \n'+ $.mobile.activePage[0].innerHTML : 'activePage: '+ undefined);
+				console.log('pageContainer: \n'+ $.mobile.pageContainer[0].outerHTML);
+				console.log('URL: '+ $.mobile.path.parseUrl(location.href).href);
+				console.log('-----------------------------------------------------------');
+			});
+		</script>
+		<title>TEST1</title>
+	</head>
+	<body>
+		<div data-role="page" id="index-page">
+			<script>
+				$(function() {
+					console.log('ready index');
+					console.log($.mobile.activePage ? 'activePage: \n'+ $.mobile.activePage[0].innerHTML : 'activePage: '+ undefined);
+					console.log('pageContainer: \n'+ $.mobile.pageContainer[0].outerHTML);
+					console.log('URL: '+ $.mobile.path.parseUrl(location.href).href);
+					console.log('-----------------------------------------------------------');
+				});
+
+				$('#index-page').bind('webkitAnimationEnd', function(ev) {
+					console.log('page:'+ ev.type +' target-id:'+ ev.target.id);
+					console.log($.mobile.activePage ? 'activePage: \n'+ $.mobile.activePage[0].innerHTML : 'activePage: '+ undefined);
+					console.log('pageContainer: \n'+ $.mobile.pageContainer[0].outerHTML);
+					console.log('URL: '+ $.mobile.path.parseUrl(location.href).href);
+					console.log('-----------------------------------------------------------');
+				});
+			</script>
+			<div data-role="header">
+				<h1>TEST 1</h1>
+			</div>
+			<div data-role="content">
+				<a href="index2.html">TEST 2(ajax)</a><br>
+				<a href="index2.html" rel="external">TEST 2(external)</a><br>
+				<a href="#" onclick="$.mobile.changePage('index2.html');">TEST 2(changePage)</a><br>
+				<input type="button" value="TEST 2(load page)" onclick="$.mobile.loadPage('index2.html');">
+			</div>
+			<div data-role="footer">
+				<div>footer</div>
+			</div>
+		</div>
+	</body>
+</html>

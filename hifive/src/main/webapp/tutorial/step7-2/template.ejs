@@ -1,0 +1,8 @@
+<script type="text/ejs" id="template1">
+	[% for(var i = 0; i < listData.length; i++) { %]
+		<div style="width:550px; border-style: solid; border-width:1px; margin :5px">
+			<span style="display:inline-block; width:490px">[%= listData[i].itemname %]</span>
+			<span style="display:inline-block; width:50px">￥[%= listData[i].price %]</span>
+		</div>
+	[% } %]
+</script>

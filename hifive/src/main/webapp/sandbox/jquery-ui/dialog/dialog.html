@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<link type="text/css" href="../lib/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../release/h5.css"/>
+
+		<script src="../../../lib/jquery/jquery.js"></script>
+		<script src="../../../lib/ejs/ejs.js"></script>
+		<script src="../../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../lib/jquery-ui-1.8.15.custom.min.js"></script>
+		<script src="../lib/jquery-ui-datepicker-ja.js"></script>
+
+		<!-- 各モジュールのソースJSを読み込む（h5.jsは必ず最初に読み込む必要がある） -->
+		<script src="../../../release/h5.js"></script>
+		<script src="dialog.js"></script>
+		<style>
+			table th {
+				font-size: 12px;
+				font-weight: bold;
+				border: 2px solid #EEE;
+				padding: 10px 10px;
+				text-align: left;
+			}
+			table td {
+				border: 1px solid white;
+				padding: .6em 10px;
+				text-align: left;
+			}
+			label {
+				display: block;
+			}
+		</style>
+
+		<title>hifive jQuery UI Dialog Sample</title>
+	</head>
+	<body>
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+		<div id="container" style="border: 1px gray solid; padding: 30px;">
+			<div id="dialog-form" title="Create new user" style="display: none;">
+				<form>
+				<fieldset>
+					<label for="name">ID</label>
+					<input type="text" name="id" id="id" class="text ui-widget-content ui-corner-all" />
+					<label for="email">名前</label>
+					<input type="text" name="userName" id="userName" value="" class="text ui-widget-content ui-corner-all" />
+					<label for="password">パスワード</label>
+					<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+				</fieldset>
+				</form>
+			</div>
+			<table id="result" class="ui-widget ui-widget-content" style="margin: 1em 0; border-collapse: collapse;">
+				<tr class="ui-widget-header">
+					<th>ID</th>
+					<th>名前</th>
+					<th>パスワード</th>
+				</tr>
+				<tr>
+					<td>test_id</td>
+					<td>test_name</td>
+					<td>test_password</td>
+				</tr>
+			</table>
+			<input type="button" id="register" value="register" />
+		</div>
+	</body>
+</html>

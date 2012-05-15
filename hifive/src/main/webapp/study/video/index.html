@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<title>video</title>
+<script src="jquery.js"></script>
+<script>
+$(function(){
+    var $div = $('#videoDiv');
+    var div = $div[0];
+
+    // Chrome Safari → mp4
+    // Opera Firefox → ogv
+    var src='video.mp4';
+
+
+ // --------------- video要素の生成 ---------------
+//     var videoDOM = document.createElement('video');
+//     videoDOM.setAttribute('src', src);
+//     videoDOM = document.createElement('video');
+//     videoDOM.setAttribute('src', src+'');
+//     videoDOM.setAttribute('controls', '');
+    var videoStr = '<video src="'+src+'" controls=""></video>';
+
+// --------------- divへvideo要素を追加 ---------------
+//     $div.html(videoDOM);
+    $div.append(videoStr);
+//     $div.append($(videoStr));
+//     div.appendChild(videoDOM);
+//     div.innerHTML = videoStr;
+//     $div.append(videoDOM);
+//     $div.append($(videoDOM));
+//     $div.append($($((videoDOM))));
+//  $div.append($($(videoStr)));
+
+
+// ---------------- イベント ----------------
+    $('video')[0].addEventListener('loadstart', function(){
+        console.log('dom loadstart');
+    });
+    $('video')[0].addEventListener('progress', function(){
+        console.log('dom progress');
+    });
+    $('video')[0].addEventListener('loadedmetadata', function(){
+        console.log('dom loadedmetadata');
+    });
+    $('video')[0].addEventListener('loadeddata', function(){
+        console.log('dom loadeddata');
+    });
+    $('video')[0].addEventListener('canplay', function(){
+        console.log('dom canplay');
+    });
+    $('video')[0].addEventListener('canplay', function(){
+        console.log('dom canplay');
+    });
+    $('video')[0].addEventListener('canplaythrough', function(){
+        console.log('dom canplaythrough');
+    });
+    $('video')[0].addEventListener('load', function(){
+        console.log('dom load');
+    });
+    $('video')[0].addEventListener('stalled', function(){
+        console.log('dom stalled');
+    });
+    $('video')[0].addEventListener('suspend', function(){
+        console.log('dom suspend');
+    });
+    $('video')[0].addEventListener('abort', function(){
+        console.log('dom abort');
+    });
+    $('video')[0].addEventListener('error', function(){
+        console.log('dom error');
+    });
+    $('video')[0].addEventListener('loadend', function(){
+        console.log('dom loadend');
+    });
+    $('video')[0].addEventListener('play', function(){
+        console.log('dom play');
+    });
+    $('video')[0].addEventListener('playing', function(){
+        console.log('dom playing');
+    });
+    $('video')[0].addEventListener('timeupdate', function(){
+        console.log('dom timeupdate');
+    });
+    $('video')[0].addEventListener('waiting', function(){
+        console.log('dom waiting');
+    });
+    $('video')[0].addEventListener('ended', function(){
+        console.log('dom ended');
+    });
+
+    // ------------ 再生 -----------
+    $('video')[0].play();
+
+
+});
+</script>
+</head>
+<body>
+<div id="videoDiv"></div>
+</body>
+</html>

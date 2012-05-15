@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="UTF-8">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="-1">
+		<link rel="stylesheet" href="../../release/h5.css"/>
+		<script src="../../lib/jquery/jquery.js"></script>
+		<script src="../../lib/ejs/ejs.js"></script>
+		<script src="../../lib/jquery/plugin/jquery.blockUI.js"></script>
+		<script src="../../release/h5.js"></script>
+		<script src="step7-1.js"></script>
+		<title>Tutorial Step 7-1</title>
+	</head>
+	<body>
+		<div class="browserNotification">
+		※ブラウザはできるだけ最新のバージョンをご利用ください。<br>
+		　特に、IE6/7等の古いブラウザでは正しく動作しない場合があります。
+		</div>
+		<div id="container">
+			<h4>商品検索</h4>
+			<select id="select-category">
+				<option value="1">おもちゃ(男の子)</option>
+				<option value="2">おもちゃ(女の子)</option>
+			</select>
+			<input type="button" value="検索" id="searchBtn">
+
+			<h4>検索結果</h4>
+			<div id="resultList"></div>
+		</div>
+	</body>
+</html>
