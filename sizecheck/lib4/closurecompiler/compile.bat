@@ -1,0 +1,1 @@
+java -jar compiler.jar --js ../../build/h5.js --js_output_file ../../build/h5.min.js --charset UTF-8
